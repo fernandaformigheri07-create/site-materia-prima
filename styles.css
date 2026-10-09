@@ -404,8 +404,10 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 }
 
 .catalog__body { position: relative; z-index: 0; }
-.group { position: relative; padding-top: var(--space-7); scroll-margin-top: calc(var(--header-h) + 76px); }
-/* Combos: faixa cinza-clara em largura total; os cartões mantêm a mesma estrutura do catálogo. */
+/* O recuo de rolagem vem só do scroll-padding-top do html (cabeçalho + barra de categorias);
+   somar um scroll-margin aqui dobrava o espaço acima do título do grupo. */
+.group { position: relative; padding-top: var(--space-7); }
+/* Combos: faixa em largura total na superfície da home; os cartões mantêm a mesma estrutura do catálogo. */
 .group--combos { padding-bottom: var(--space-7); }
 .group--combos::before {
   position: absolute; z-index: -1; top: 0; bottom: 0; left: 50%;

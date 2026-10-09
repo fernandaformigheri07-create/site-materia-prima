@@ -32,7 +32,7 @@ A prévia **não** tem checkout, frete, pagamento, CPF, endereço nem envio de p
 | [`catalogo.csv`](./catalogo.csv) | A mesma lista em formato de planilha. |
 | [`vitrine.json`](./vitrine.json) | Seleção da vitrine: grupos, ordem, IDs dos 100 produtos, critérios e nomes de exibição opcionais. |
 | `assets/catalog/` | Fotos originais em WebP. A subpasta `thumbs/` guarda as miniaturas de 240 px usadas nos cartões. |
-| `assets/hero/` | Imagem da página inicial: a nova mão (composição fornecida em 9/10/2026) com o pote trocado pela foto oficial do produto 1987. `mao-creatina.webp` tem 1223 px; `mao-creatina-760.webp` é a versão menor. |
+| `assets/hero/` | Imagem da página inicial: a mão aprovada (`6.webp`) com o pote trocado pela foto oficial do produto 1987. `mao-creatina.webp` tem 1391 px; `mao-creatina-860.webp` é a versão menor. |
 | `assets/marca/` | Logotipo oficial fornecido (`logo-materia-prima-original.jpg`, 150 × 150 px), usado sem nenhuma alteração: 52 px no cabeçalho, 44 px no celular e no rodapé, e também como ícone da aba. |
 | [`scripts/gerar-miniaturas.py`](./scripts/gerar-miniaturas.py) | Gera as miniaturas a partir de `vitrine.json` (precisa de Pillow). |
 | [`LEVANTAMENTO.md`](./LEVANTAMENTO.md) | Método da coleta, regras de Guaíba e pendências de Passo Fundo. |
@@ -68,25 +68,31 @@ Nenhum dado de vendas ou popularidade foi usado.
 
 ## Imagem da página inicial
 
-A imagem usada é a nova composição da mão fornecida em 9/10/2026, que tem contato físico mais convincente: os dedos passam na frente da base do pote e a palma o sustenta. O rótulo dessa imagem foi gerado por IA e tinha textos inventados ("MG / % RDV / CARB", selo "Qualidade 100% garantida", "Suplemento alimentar em pó"). Por isso, **só o pote foi substituído** pela foto oficial do produto 1987, *Creatina Matéria Prima Pote 300g*.
+A imagem usada é a última composição da mão aprovada (`6.webp`, fornecida em 9/10/2026): a palma sustenta o pote por baixo e os dedos ficam na frente da base. O rótulo dessa imagem foi gerado por IA e tinha textos inventados ("MG / % RDV / CARB", selo "Qualidade 100% garantida", "Suplemento alimentar em pó"). Por isso, **só o pote foi substituído** pela foto oficial do produto 1987, *Creatina Matéria Prima Pote 300g*.
 
 A montagem foi feita em camadas:
 
 1. mão sem o pote da IA;
-2. pote oficial em escala proporcional (1,413 nos dois eixos, mesma largura do pote original), com a base atrás da borda da palma;
+2. pote oficial em escala proporcional (1,807 nos dois eixos, mesma largura do pote original), com a base atrás da borda da palma. O pote oficial é mais alto que o da IA, então a tela ganhou 210 px no topo para a tampa não ser cortada (1391 × 1263 px);
 3. dedos e palma que ficam na frente da base, recortados da imagem original. Só entra pele ligada à mão, o que evita que letras do rótulo antigo sejam confundidas com pele.
 
-Nenhum texto do rótulo foi inventado ou redesenhado. A composição anterior fica guardada no histórico do Git.
+Nenhum texto do rótulo foi inventado ou redesenhado. As composições anteriores ficam guardadas no histórico do Git.
 
-Na página, a imagem não tem painel nem moldura. Ela fica ancorada na borda direita (6% do antebraço passa da tela) e a base da seção corta o braço como uma foto sangrada. O tamanho vem de `--hand-w`, que acompanha a largura e a altura da tela:
+Arquivos: `mao-creatina.webp` (1391 px) e `mao-creatina-860.webp` (versão menor, usada em telas comuns).
 
-- 741 px em 1440 × 900;
-- 600 px em 1366 × 700;
-- 820 px em telas acima de 1600 px;
-- até 420 px no celular;
-- abaixo de 900 px a página inicial empilha texto e imagem.
+Na página, a imagem não tem painel nem moldura. Ela fica ancorada na borda direita, e a base da seção corta o braço como uma foto sangrada. O tamanho vem de `--hand-w`, que acompanha a largura e a altura da tela. O pote ocupa cerca de 55% da largura da imagem:
 
-**Movimento:** a versão animada (mão subindo pela base) foi testada e descartada. Como o pote fica acima da palma, qualquer entrada vertical mostra o pote subindo sozinho por cerca de meio segundo antes de a mão aparecer, o que parece montagem. A imagem é estática e aparece imediatamente. A gravação do teste está em `_referencia/capturas-v5/versao-B-animada-descartada.gif`, fora do Git.
+| Tela | Largura da imagem | Largura do pote |
+| --- | --- | --- |
+| 1440 × 900 | 763 px | ~416 px |
+| 1366 × 700 | 587 px (limitada pela altura) | ~323 px |
+| 1920 × 1080 | 820 px (máximo) | ~452 px |
+| tablet 768 | 599 px | ~324 px |
+| celular 390 | 390 px | ~206 px |
+
+Abaixo de 900 px a página inicial empilha texto e imagem. Entre 900 e 1199 px a mão recua um pouco mais para a direita, para as pontas dos dedos não encostarem nos botões. Acima de 1600 px ela avança até perto do centro.
+
+**Movimento:** o conjunto mão + pote entra pela borda direita, na direção do antebraço, com uma leve subida: `translate: 96% 12%` → `0 0` em 1,25 s, com desaceleração suave (`cubic-bezier(0.33, 0.1, 0.2, 1)`), sem zoom, sem quique, sem fade e sem repetição. As pontas dos dedos aparecem antes do pote, que já surge apoiado na palma. A entrada começa quando a imagem termina de carregar; o HTML tem uma reserva de 2,5 s. Sem JavaScript a imagem aparece parada no lugar, e com "reduzir movimento" ativo não há animação. A versão anterior, com a mão subindo pela base, foi descartada porque mostrava o pote subindo sozinho. A gravação da versão atual está em `_referencia/capturas-v6/animacao-mao-entrada-lateral.gif`, fora do Git.
 
 ## Identidade e cores
 
