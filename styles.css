@@ -8,7 +8,7 @@
 
 /* ---------- Tokens ---------- */
 :root {
-  /* Paleta: amarelo do logotipo oficial (#F8C305), preto e uma família quente sem tom rosado (G >= R - 3) */
+  /* Paleta: amarelo medido no arquivo oficial do logotipo (#FBC501), preto e uma família quente sem tom rosado (G >= R - 3) */
   --black: #202020;
   --text: #34332f;
   --muted: #5f5f5c;
@@ -18,7 +18,7 @@
   --stage: #f5f3ec;              /* cabeçalho, home, combos e informações */
   --paper: #faf9f5;              /* catálogo: mais claro e calmo */
   --white: #fff;
-  --yellow: #f8c305;
+  --yellow: #fbc501;
   --yellow-hover: #e8b500;
 
   --font: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -231,12 +231,19 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 }
 
 /* ---------- Hero ----------
-   A mão (asset 1391 x 1263, altura = 0,908 x largura) entra pela borda direita e pela base,
-   sem caixa em volta. O pote ocupa ~55% da largura da imagem: em 1440 px fica com ~420 px.
-   --hand-w define a largura; a seção cresce junto, reservando o topo para a tampa. */
+   A mão segurando o pote oficial é a protagonista. Asset 1254 x 1406 (altura = 1,1212 x largura).
+   Geometria do asset, em frações da largura (W) e da altura (H) da imagem:
+   - pote: x 0,173 a 0,774 (largura 0,601 W; centro em 0,4735 W), y 0,007 a 0,745 H;
+   - pontas dos dedos: x 0,019 W;
+   - abaixo de 0,83 H só há palma e punho. A base da seção corta a imagem ali, como foto sangrada;
+     nessa linha o braço ainda não encosta na borda direita do arquivo, então a imagem pode ser
+     posicionada pela ponta dos dedos sem mostrar corte reto no antebraço.
+   --hand-w é a largura da imagem e a altura da seção acompanha. Sem animação de entrada:
+   a imagem carrega direto na posição final. */
 .hero {
-  --hand-w: clamp(380px, min(53vw, (100svh - 190px) * 1.15), 820px);
-  --hand-h: calc(var(--hand-w) * 0.908);
+  --hand-w: clamp(380px, min(52vw, (100svh - 128px) / 0.93), 860px);
+  --hand-vis: calc(var(--hand-w) * 0.93); /* 0,83 x 1,1212: parte visível da imagem */
+  --tip: 50%; /* posição das pontas dos dedos, a partir da esquerda da seção */
   position: relative;
   display: grid;
   grid-template-columns:
@@ -244,7 +251,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
     minmax(0, calc(var(--content) * 0.5))
     minmax(0, calc(var(--content) * 0.5))
     minmax(var(--gutter), 1fr);
-  min-height: max(460px, calc(var(--hand-h) * 0.92 + 32px));
+  min-height: max(460px, calc(var(--hand-vis) + 24px));
   background: var(--stage);
   border-bottom: 1px solid var(--line);
   overflow: clip;
@@ -255,10 +262,10 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .hero h1 {
   max-width: 12ch;
   margin-top: var(--space-4);
-  font-size: clamp(2.375rem, 1.35rem + 3vw, 4rem);
+  font-size: clamp(2.25rem, 1.2rem + 2.6vw, 3.5rem);
   font-weight: 800;
-  line-height: 1.02;
-  letter-spacing: -0.04em;
+  line-height: 1.03;
+  letter-spacing: -0.035em;
 }
 .hero__text { max-width: 33ch; margin-top: var(--space-5); color: var(--text); font-size: 1.125rem; line-height: 1.5; }
 .hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-top: var(--space-6); }
@@ -267,33 +274,22 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .hero__media { position: absolute; inset: 0; pointer-events: none; }
 .hero__image {
   position: absolute;
-  right: calc(var(--hand-w) * -0.08);      /* 8% do antebraço passa da borda direita */
-  bottom: calc(var(--hand-h) * -0.08);     /* 8% (antebraço) fica abaixo da seção */
+  left: calc(var(--tip) - var(--hand-w) * 0.019);
+  bottom: calc(var(--hand-w) * -0.19); /* 17% da altura da imagem fica abaixo da seção */
   width: var(--hand-w);
+  max-width: none;
   height: auto;
-  aspect-ratio: 1391 / 1263;
+  aspect-ratio: 1254 / 1406;
 }
 
-/* Entrada da mão: o conjunto mão + pote chega pela direita, na direção do antebraço,
-   com uma leve subida. As pontas dos dedos aparecem primeiro e o pote já surge apoiado.
-   Só com JavaScript (a imagem fica visível sem ele) e nunca com movimento reduzido. */
-.js .hero__image { translate: 96% 12%; }
-.js .hero__image.is-in { translate: 0 0; animation: hand-reach 1.25s cubic-bezier(0.33, 0.1, 0.2, 1) both; }
-@keyframes hand-reach { from { translate: 96% 12%; } to { translate: 0 0; } }
-
-/* Telas largas: a mão avança até perto do centro, sem deixar vazio entre texto e produto. */
-@media (min-width: 1600px) {
-  .hero__image { right: 0; }
-}
-
-/* Notebooks estreitos: mais antebraço fora da tela para manter folga entre dedos e botões. */
+/* Notebooks estreitos: o texto ocupa mais da largura, então os dedos param um pouco depois do meio. */
 @media (min-width: 900px) and (max-width: 1199px) {
-  .hero__image { right: calc(var(--hand-w) * -0.13); }
+  .hero { --tip: 54%; }
 }
 
 @media (max-width: 899px) {
   .hero {
-    --hand-w: min(100vw, 460px);
+    --hand-w: min(100vw, 440px);
     grid-template-columns: var(--gutter) minmax(0, 1fr) var(--gutter);
     min-height: 0;
   }
@@ -303,21 +299,27 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   .hero__actions { margin-top: var(--space-5); }
   .hero__media {
     position: relative; inset: auto;
-    grid-column: 2 / 4;
-    height: calc(var(--hand-h) * 0.92);
+    grid-column: 1 / -1;
+    height: var(--hand-vis);
     margin-top: var(--space-4);
   }
+  /* Empilhado: o pote fica centralizado na largura da tela. */
+  .hero__image { top: 0; bottom: auto; left: calc(50% - var(--hand-w) * 0.4735); }
 }
 
 /* Tablet em pé: mesma composição empilhada do celular, com a mão maior. */
 @media (min-width: 600px) and (max-width: 899px) {
-  .hero { --hand-w: min(78vw, 600px); }
+  .hero { --hand-w: min(74vw, 600px); }
   .hero__copy { padding-top: var(--space-7); }
 }
 
+/* Celular: texto um pouco mais compacto para o pote inteiro, apoiado na palma, caber na primeira tela. */
 @media (max-width: 480px) {
+  .hero__copy { padding-top: var(--space-5); }
   .hero h1 { font-size: 2.25rem; }
+  .hero__actions { margin-top: var(--space-4); }
   .hero__actions .button { flex: 1 1 auto; padding: 0 16px; }
+  .hero__media { margin-top: var(--space-3); }
 }
 
 /* ---------- Catalog head + category bar ---------- */
@@ -539,11 +541,17 @@ body.has-dialog { overflow: hidden; }
 .dialog-close { position: absolute; z-index: 2; top: var(--space-3); right: var(--space-3); }
 
 .gallery { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-5); background: var(--surface); }
-.gallery__frame { display: grid; place-items: center; aspect-ratio: 1; }
-.gallery__frame img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+.gallery__frame { position: relative; display: grid; place-items: center; aspect-ratio: 1; }
+/* Posição absoluta: a foto sempre cabe na moldura (no celular a moldura tem altura fixa
+   e a foto quadrada passava por baixo dos botões da galeria). */
+.gallery__frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
 .gallery__controls { display: flex; align-items: center; justify-content: center; gap: var(--space-4); color: var(--muted); font-size: var(--fs-sm); font-variant-numeric: tabular-nums; }
 
 .product-dialog__content { display: flex; flex-direction: column; gap: var(--space-4); padding: var(--space-6) var(--space-6) var(--space-5); }
+/* Produto sem opções: nome, descrição, preço e botão ficam juntos, centralizados ao lado da foto.
+   Com muitas opções, as margens automáticas zeram e a compra continua fixa no fim da coluna. */
+.product-dialog__content > :first-child { margin-top: auto; }
+.product-dialog__content > div:empty { display: none; } /* "inclui" e opções vazias não somam espaço */
 .product-dialog__group { padding-right: 48px; color: var(--muted); font-size: var(--fs-sm); font-weight: 600; }
 .product-dialog__content h2 { margin-top: calc(-1 * var(--space-2)); padding-right: 32px; font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.02em; }
 .product-dialog__description { color: var(--muted); font-size: var(--fs-sm); }
@@ -578,7 +586,7 @@ body.has-dialog { overflow: hidden; }
 .product-dialog__buy {
   position: sticky; bottom: 0;
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3);
-  margin-top: auto; padding-top: var(--space-4);
+  margin-top: var(--space-3); margin-bottom: auto; padding-top: var(--space-4);
   border-top: 1px solid var(--line);
   background: var(--white);
 }
@@ -669,7 +677,6 @@ body.has-dialog { overflow: hidden; }
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .js .hero__image, .js .hero__image.is-in { translate: 0 0; animation: none; }
   .product-dialog[open],
   .cart-drawer[open],
   .cart-button__count.is-bump { animation: none; }

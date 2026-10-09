@@ -852,15 +852,6 @@ function celebrateAdd(product, fromRect) {
 /* ---------- Hero ---------- */
 
 function setupHero() {
-  // Entrada da mão: começa quando a imagem estiver carregada (o HTML tem uma reserva de 2,5 s).
-  const image = $("#hero-image");
-  const reveal = () => requestAnimationFrame(() => image.classList.add("is-in"));
-  if (image.complete && image.naturalWidth > 0) reveal();
-  else {
-    image.addEventListener("load", reveal, { once: true });
-    image.addEventListener("error", reveal, { once: true });
-  }
-
   // Cabeçalho divide a superfície da home; ganha uma linha só depois que a página rola.
   const header = $(".site-header");
   const markScrolled = () => header.classList.toggle("is-scrolled", window.scrollY > 4);
