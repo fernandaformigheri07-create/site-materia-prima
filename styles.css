@@ -231,13 +231,12 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 }
 
 /* ---------- Hero ----------
-   A mão entra pela borda direita e pela base da seção, sem caixa em volta, e o produto é o protagonista.
-   --hand-w define a largura da imagem (proporção 1223 x 1199); a seção cresce junto,
-   reservando o topo para a tampa e cortando o antebraço na base. */
+   A mão (asset 1391 x 1263, altura = 0,908 x largura) entra pela borda direita e pela base,
+   sem caixa em volta. O pote ocupa ~55% da largura da imagem: em 1440 px fica com ~420 px.
+   --hand-w define a largura; a seção cresce junto, reservando o topo para a tampa. */
 .hero {
-  --hand-w: clamp(380px, min(52vw, (100svh - 200px) * 1.2), 780px);
-  --hand-overhang: 0.16;            /* parte do antebraço abaixo da seção */
-  --hand-shift: 0.06;               /* parte do antebraço além da borda direita */
+  --hand-w: clamp(380px, min(53vw, (100svh - 190px) * 1.15), 820px);
+  --hand-h: calc(var(--hand-w) * 0.908);
   position: relative;
   display: grid;
   grid-template-columns:
@@ -245,7 +244,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
     minmax(0, calc(var(--content) * 0.5))
     minmax(0, calc(var(--content) * 0.5))
     minmax(var(--gutter), 1fr);
-  min-height: max(460px, calc(var(--hand-w) * (0.98 - var(--hand-overhang)) + 36px));
+  min-height: max(460px, calc(var(--hand-h) * 0.92 + 32px));
   background: var(--stage);
   border-bottom: 1px solid var(--line);
   overflow: clip;
@@ -268,20 +267,33 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .hero__media { position: absolute; inset: 0; pointer-events: none; }
 .hero__image {
   position: absolute;
-  right: calc(var(--hand-w) * var(--hand-shift) * -1);
-  bottom: calc(var(--hand-w) * var(--hand-overhang) * -1);
+  right: calc(var(--hand-w) * -0.08);      /* 8% do antebraço passa da borda direita */
+  bottom: calc(var(--hand-h) * -0.08);     /* 8% (antebraço) fica abaixo da seção */
   width: var(--hand-w);
   height: auto;
-  aspect-ratio: 1223 / 1199;
+  aspect-ratio: 1391 / 1263;
 }
 
+/* Entrada da mão: o conjunto mão + pote chega pela direita, na direção do antebraço,
+   com uma leve subida. As pontas dos dedos aparecem primeiro e o pote já surge apoiado.
+   Só com JavaScript (a imagem fica visível sem ele) e nunca com movimento reduzido. */
+.js .hero__image { translate: 96% 12%; }
+.js .hero__image.is-in { translate: 0 0; animation: hand-reach 1.25s cubic-bezier(0.33, 0.1, 0.2, 1) both; }
+@keyframes hand-reach { from { translate: 96% 12%; } to { translate: 0 0; } }
+
+/* Telas largas: a mão avança até perto do centro, sem deixar vazio entre texto e produto. */
 @media (min-width: 1600px) {
-  .hero { --hand-w: clamp(380px, min(44vw, (100svh - 200px) * 1.2), 820px); }
+  .hero__image { right: 0; }
+}
+
+/* Notebooks estreitos: mais antebraço fora da tela para manter folga entre dedos e botões. */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .hero__image { right: calc(var(--hand-w) * -0.13); }
 }
 
 @media (max-width: 899px) {
   .hero {
-    --hand-w: min(96vw, 420px);
+    --hand-w: min(100vw, 460px);
     grid-template-columns: var(--gutter) minmax(0, 1fr) var(--gutter);
     min-height: 0;
   }
@@ -292,14 +304,14 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   .hero__media {
     position: relative; inset: auto;
     grid-column: 2 / 4;
-    height: calc(var(--hand-w) * (0.98 - var(--hand-overhang)));
+    height: calc(var(--hand-h) * 0.92);
     margin-top: var(--space-4);
   }
 }
 
 /* Tablet em pé: mesma composição empilhada do celular, com a mão maior. */
 @media (min-width: 600px) and (max-width: 899px) {
-  .hero { --hand-w: min(74vw, 580px); }
+  .hero { --hand-w: min(78vw, 600px); }
   .hero__copy { padding-top: var(--space-7); }
 }
 
@@ -655,6 +667,7 @@ body.has-dialog { overflow: hidden; }
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .js .hero__image, .js .hero__image.is-in { translate: 0 0; animation: none; }
   .product-dialog[open],
   .cart-drawer[open],
   .cart-button__count.is-bump { animation: none; }
