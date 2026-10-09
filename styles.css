@@ -8,14 +8,15 @@
 
 /* ---------- Tokens ---------- */
 :root {
-  /* Paleta: amarelo do logotipo oficial (#F8C305), branco e neutros sem tom quente */
+  /* Paleta: amarelo do logotipo oficial (#F8C305), preto e uma família quente sem tom rosado (G >= R - 3) */
   --black: #202020;
   --text: #34332f;
-  --muted: #666666;
-  --line: #eaeae5;
-  --line-strong: #d2d2cb;
-  --surface: #f5f5f3;
-  --soft: #fafaf8;
+  --muted: #5f5f5c;
+  --line: #e7e4da;
+  --line-strong: #8c887d;        /* borda de controles: >= 3:1 em paper, stage e branco */
+  --surface: #f2f0e8;            /* fundo das fotos de produto */
+  --stage: #f5f3ec;              /* cabeçalho, home, combos e informações */
+  --paper: #faf9f5;              /* catálogo: mais claro e calmo */
   --white: #fff;
   --yellow: #f8c305;
   --yellow-hover: #e8b500;
@@ -70,7 +71,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--white);
+  background: var(--paper);
   color: var(--text);
   font: 400 var(--fs-base)/1.5 var(--font);
   -webkit-font-smoothing: antialiased;
@@ -144,10 +145,9 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 
 /* ---------- Demo bar + header ---------- */
 .demo-bar {
-  padding: 8px var(--gutter);
-  background: var(--surface);
-  border-bottom: 1px solid var(--line);
-  color: #555;
+  padding: 7px var(--gutter);
+  background: var(--black);
+  color: #ecebe5;
   font-size: var(--fs-xs);
   text-align: center;
 }
@@ -160,16 +160,21 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 
 .site-header {
   position: sticky; z-index: 30; top: 0;
-  background: var(--white);
-  border-bottom: 1px solid var(--line);
+  background: var(--stage);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
 }
-.site-header__inner { display: flex; align-items: center; gap: var(--space-6); height: var(--header-h); }
+.site-header.is-scrolled { border-bottom-color: var(--line); }
+/* Três colunas: logotipo | navegação centralizada no cabeçalho | sacola */
+.site-header__inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--space-5); height: var(--header-h); }
+.site-header__inner .brand { justify-self: start; }
+.site-header__inner .header-actions { justify-self: end; }
 
 /* Logotipo oficial: arquivo quadrado fornecido, sem corte, filtro, cantos ou distorção. */
 .brand { display: inline-flex; flex: none; text-decoration: none; }
 .brand img { width: 52px; height: 52px; }
 
-.main-nav { display: flex; gap: var(--space-5); margin-left: auto; }
+.main-nav { display: flex; gap: var(--space-6); }
 .main-nav a {
   display: inline-flex; align-items: center; min-height: var(--tap);
   color: var(--text); font-size: var(--fs-sm); font-weight: 600; text-decoration: none;
@@ -210,10 +215,9 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 }
 
 @media (max-width: 760px) {
-  .site-header__inner { gap: var(--space-3); }
+  .site-header__inner { grid-template-columns: 1fr auto; gap: var(--space-3); }
   .brand img { width: 44px; height: 44px; }
   .menu-button { display: inline-grid; }
-  .header-actions { margin-left: auto; }
   .main-nav {
     position: absolute; top: 100%; right: 0; left: 0;
     display: none; flex-direction: column; gap: 0;
@@ -227,12 +231,13 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 }
 
 /* ---------- Hero ----------
-   A mão entra pela borda direita e pela base da seção, sem caixa em volta.
-   --hand-w define o tamanho da imagem; a altura da seção acompanha a altura da tela
-   para o catálogo aparecer cedo em notebooks. */
+   A mão entra pela borda direita e pela base da seção, sem caixa em volta, e o produto é o protagonista.
+   --hand-w define a largura da imagem (proporção 1223 x 1199); a seção cresce junto,
+   reservando o topo para a tampa e cortando o antebraço na base. */
 .hero {
-  --hand-w: clamp(360px, min(46vw, (100svh - 220px) * 1.06), 600px);
-  --hand-overhang: 0.2;             /* parte do antebraço que fica abaixo da seção */
+  --hand-w: clamp(380px, min(52vw, (100svh - 200px) * 1.2), 780px);
+  --hand-overhang: 0.16;            /* parte do antebraço abaixo da seção */
+  --hand-shift: 0.06;               /* parte do antebraço além da borda direita */
   position: relative;
   display: grid;
   grid-template-columns:
@@ -240,58 +245,43 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
     minmax(0, calc(var(--content) * 0.5))
     minmax(0, calc(var(--content) * 0.5))
     minmax(var(--gutter), 1fr);
-  min-height: max(440px, calc(var(--hand-w) * 0.92));
-  background: var(--soft);
+  min-height: max(460px, calc(var(--hand-w) * (0.98 - var(--hand-overhang)) + 36px));
+  background: var(--stage);
   border-bottom: 1px solid var(--line);
   overflow: clip;
 }
-.hero__copy { position: relative; z-index: 1; grid-column: 2; align-self: center; padding: var(--space-6) var(--space-5) var(--space-6) 0; }
+.hero__copy { position: relative; z-index: 1; grid-column: 2; align-self: center; padding: var(--space-6) var(--space-5) var(--space-7) 0; }
 .hero__store { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: var(--fs-sm); font-weight: 600; }
 .hero__store::before { width: 22px; height: 3px; border-radius: 2px; background: var(--yellow); content: ""; }
 .hero h1 {
-  max-width: 12.5ch;
+  max-width: 12ch;
   margin-top: var(--space-4);
-  font-size: clamp(2.25rem, 1.3rem + 2.9vw, 3.625rem);
+  font-size: clamp(2.375rem, 1.35rem + 3vw, 4rem);
   font-weight: 800;
-  line-height: 1.04;
-  letter-spacing: -0.035em;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
 }
-.hero__text { max-width: 34ch; margin-top: var(--space-4); color: var(--text); font-size: 1.125rem; line-height: 1.5; }
+.hero__text { max-width: 33ch; margin-top: var(--space-5); color: var(--text); font-size: 1.125rem; line-height: 1.5; }
 .hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-top: var(--space-6); }
 .hero__caption { margin-top: var(--space-3); color: var(--muted); font-size: var(--fs-xs); }
 
 .hero__media { position: absolute; inset: 0; pointer-events: none; }
 .hero__image {
   position: absolute;
-  right: 0;
+  right: calc(var(--hand-w) * var(--hand-shift) * -1);
   bottom: calc(var(--hand-w) * var(--hand-overhang) * -1);
   width: var(--hand-w);
   height: auto;
-  aspect-ratio: 1120 / 1106;
-  transform-origin: 100% 100%;     /* giro discreto a partir do antebraço, fora do quadro */
+  aspect-ratio: 1223 / 1199;
 }
-
-/* Entrada da mão: começa abaixo da seção (fora do quadro) e sobe em arco curto,
-   como alguém trazendo o pote para a frente. A curva acelera aos poucos, chega à
-   velocidade máxima perto de 30% do tempo e desacelera de forma contínua; o giro
-   termina um pouco depois da subida, como o pulso assentando. Sem fade, zoom ou quique. */
-.js .hero__image { visibility: hidden; }
-.js .hero__image.is-in {
-  visibility: visible;
-  animation:
-    hand-lift 1.6s cubic-bezier(0.33, 0.1, 0.2, 1) both,
-    hand-settle 1.8s cubic-bezier(0.33, 0.1, 0.2, 1) both;
-}
-@keyframes hand-lift { from { translate: 0 var(--hand-enter, 82%); } to { translate: 0 0; } }
-@keyframes hand-settle { from { rotate: -5deg; } to { rotate: 0deg; } }
 
 @media (min-width: 1600px) {
-  .hero { --hand-w: clamp(360px, min(40vw, (100svh - 220px) * 1.06), 680px); }
+  .hero { --hand-w: clamp(380px, min(44vw, (100svh - 200px) * 1.2), 820px); }
 }
 
-@media (max-width: 699px) {
+@media (max-width: 899px) {
   .hero {
-    --hand-w: min(78vw, 340px);
+    --hand-w: min(96vw, 420px);
     grid-template-columns: var(--gutter) minmax(0, 1fr) var(--gutter);
     min-height: 0;
   }
@@ -302,13 +292,19 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   .hero__media {
     position: relative; inset: auto;
     grid-column: 2 / 4;
-    height: calc(var(--hand-w) * (0.9875 - var(--hand-overhang)));
-    margin-top: var(--space-5);
+    height: calc(var(--hand-w) * (0.98 - var(--hand-overhang)));
+    margin-top: var(--space-4);
   }
 }
 
+/* Tablet em pé: mesma composição empilhada do celular, com a mão maior. */
+@media (min-width: 600px) and (max-width: 899px) {
+  .hero { --hand-w: min(74vw, 580px); }
+  .hero__copy { padding-top: var(--space-7); }
+}
+
 @media (max-width: 480px) {
-  .hero h1 { font-size: 2.125rem; }
+  .hero h1 { font-size: 2.25rem; }
   .hero__actions .button { flex: 1 1 auto; padding: 0 16px; }
 }
 
@@ -345,7 +341,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .category-bar {
   position: sticky; z-index: 20; top: var(--header-h);
   margin-top: var(--space-5);
-  background: var(--white);
+  background: var(--paper);
   border-block: 1px solid var(--line);
 }
 .category-bar__inner { position: relative; }
@@ -360,7 +356,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .category-bar__inner::after {
   position: absolute; top: 1px; right: 0; bottom: 1px;
   width: 48px;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0), #fff 80%);
+  background: linear-gradient(90deg, rgba(250, 249, 245, 0), var(--paper) 80%);
   content: "";
   opacity: 0;
   pointer-events: none;
@@ -402,7 +398,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .group--combos::before {
   position: absolute; z-index: -1; top: 0; bottom: 0; left: 50%;
   width: 100vw; margin-left: -50vw;
-  background: var(--surface);
+  background: var(--stage);
   border-block: 1px solid var(--line);
   content: "";
 }
@@ -425,7 +421,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   background: var(--white);
   transition: border-color 0.15s ease;
 }
-.card:hover { border-color: var(--line-strong); }
+.card:hover { border-color: #cfcbbf; }
 .card--combo { grid-template-columns: 128px minmax(0, 1fr); min-height: 168px; }
 
 .card__media {
@@ -490,7 +486,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .catalog__error { margin-top: var(--space-7); color: var(--black); font-weight: 600; }
 
 /* ---------- Info + footer ---------- */
-.info-band { background: var(--soft); border-top: 1px solid var(--line); }
+.info-band { background: var(--stage); border-top: 1px solid var(--line); }
 .info { padding: var(--space-7) 0 var(--space-8); }
 .info h2 { font-size: var(--fs-xl); letter-spacing: -0.015em; }
 .info__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5) var(--space-6); margin-top: var(--space-5); }
@@ -500,8 +496,11 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   .info__grid { grid-template-columns: minmax(0, 1fr); }
 }
 
-.site-footer { border-top: 1px solid var(--line); }
-.site-footer__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3) var(--space-5); padding-block: var(--space-5); color: var(--muted); font-size: var(--fs-xs); }
+/* Encerramento na cor da marca: o quadrado amarelo do logotipo se funde à faixa. */
+.site-footer { background: var(--yellow); color: var(--black); }
+.site-footer__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3) var(--space-5); padding-block: var(--space-5); font-size: var(--fs-xs); }
+.site-footer a { color: var(--black); }
+.site-footer :focus-visible { outline-color: var(--black); }
 .site-footer p { max-width: 60ch; }
 .brand--small img { width: 44px; height: 44px; }
 
@@ -656,8 +655,6 @@ body.has-dialog { overflow: hidden; }
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .js .hero__image { visibility: visible; }
-  .js .hero__image.is-in { visibility: visible; animation: none; }
   .product-dialog[open],
   .cart-drawer[open],
   .cart-button__count.is-bump { animation: none; }

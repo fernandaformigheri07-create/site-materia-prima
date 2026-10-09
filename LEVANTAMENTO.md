@@ -88,7 +88,8 @@ Referência visual: gravação da loja C10 de Guaíba, com cartões horizontais 
 ### Pendências para a versão comercial
 
 - Confirmar em Passo Fundo: produtos, preços, estoque, endereço, horários, áreas e taxas de entrega e formas de pagamento.
-- Aprovar a imagem da página inicial: a mão aprovada com o pote trocado pela foto oficial do produto 1987, em escala proporcional.
+- Aprovar a imagem da página inicial: a nova mão com o pote trocado pela foto oficial do produto 1987.
+- Foto oficial do pote em alta resolução: a do catálogo tem 720 px e foi ampliada 1,41 vez na montagem. Fica nítida em telas comuns e um pouco suave em telas de alta densidade.
 - Revisar erros de digitação do cadastro de origem, mantidos como estão: "Penuat"/"Peanut", "Protrein", "Atlhetica", "Gormert", "Concetrado".
 - Logotipo em alta resolução: o arquivo fornecido tem 150 × 150 px. No formato quadrado e com 52 px, o nome "Matéria Prima" fica pequeno; a marca é reconhecida pelo quadrado amarelo. Um SVG ou PNG em alta resolução melhora a nitidez, mas não aumenta o nome dentro do quadrado.
 - Perfis oficiais em redes sociais (continuam sem confirmação).

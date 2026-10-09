@@ -852,14 +852,11 @@ function celebrateAdd(product, fromRect) {
 /* ---------- Hero ---------- */
 
 function setupHero() {
-  const image = $("#hero-image");
-  // Pequena pausa depois do carregamento, para a entrada não competir com o primeiro desenho da página.
-  const reveal = () => setTimeout(() => requestAnimationFrame(() => image.classList.add("is-in")), 150);
-  if (image.complete && image.naturalWidth > 0) reveal();
-  else {
-    image.addEventListener("load", reveal, { once: true });
-    image.addEventListener("error", () => image.classList.add("is-in"), { once: true });
-  }
+  // Cabeçalho divide a superfície da home; ganha uma linha só depois que a página rola.
+  const header = $(".site-header");
+  const markScrolled = () => header.classList.toggle("is-scrolled", window.scrollY > 4);
+  markScrolled();
+  window.addEventListener("scroll", markScrolled, { passive: true });
 
   // CTA da foto: abre a ficha do produto exato da embalagem; sem ele na vitrine, mostra as creatinas.
   const button = $("#hero-product");

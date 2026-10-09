@@ -14,7 +14,7 @@ Depois abra `http://127.0.0.1:4173`. Não há dependências para instalar.
 
 ## O que esta versão faz
 
-- Cabeçalho compacto com o logotipo oficial quadrado. Página inicial clara, com a mão segurando a creatina integrada à seção: o braço entra pela borda direita e pela base, sem caixa ou painel. Há dois caminhos: **Ver creatina Matéria Prima**, que abre a ficha do produto da foto, e **Explorar produtos**, que leva ao catálogo.
+- Cabeçalho na mesma superfície quente da página inicial, com o logotipo oficial quadrado, navegação centralizada e sacola. A mão segurando a creatina é a protagonista da página inicial: o braço entra pela borda direita e pela base, sem caixa ou painel. Há dois caminhos: **Ver creatina Matéria Prima**, que abre a ficha do produto da foto, e **Explorar produtos**, que leva ao catálogo.
 - Vitrine com **100 produtos** em 7 categorias, visível sem cliques extras. As categorias filtram a lista, e a barra de categorias fica fixa durante a rolagem.
 - Busca por nome, marca, descrição ou sabor, sem diferenciar acentos nem maiúsculas. Também há ordenação por preço ou nome, contagem de resultados e um botão para limpar os filtros.
 - Combos em seção própria, com a lista "o que vem no combo" tirada da descrição cadastrada.
@@ -32,7 +32,7 @@ A prévia **não** tem checkout, frete, pagamento, CPF, endereço nem envio de p
 | [`catalogo.csv`](./catalogo.csv) | A mesma lista em formato de planilha. |
 | [`vitrine.json`](./vitrine.json) | Seleção da vitrine: grupos, ordem, IDs dos 100 produtos, critérios e nomes de exibição opcionais. |
 | `assets/catalog/` | Fotos originais em WebP. A subpasta `thumbs/` guarda as miniaturas de 240 px usadas nos cartões. |
-| `assets/hero/` | Imagem da página inicial: a mão aprovada, com o pote trocado pela foto oficial do produto. |
+| `assets/hero/` | Imagem da página inicial: a nova mão (composição fornecida em 9/10/2026) com o pote trocado pela foto oficial do produto 1987. `mao-creatina.webp` tem 1223 px; `mao-creatina-760.webp` é a versão menor. |
 | `assets/marca/` | Logotipo oficial fornecido (`logo-materia-prima-original.jpg`, 150 × 150 px), usado sem nenhuma alteração: 52 px no cabeçalho, 44 px no celular e no rodapé, e também como ícone da aba. |
 | [`scripts/gerar-miniaturas.py`](./scripts/gerar-miniaturas.py) | Gera as miniaturas a partir de `vitrine.json` (precisa de Pillow). |
 | [`LEVANTAMENTO.md`](./LEVANTAMENTO.md) | Método da coleta, regras de Guaíba e pendências de Passo Fundo. |
@@ -68,20 +68,45 @@ Nenhum dado de vendas ou popularidade foi usado.
 
 ## Imagem da página inicial
 
-A composição aprovada (mão, pose e enquadramento) foi mantida. O pote gerado por IA tinha textos errados no rótulo, como "Mhts la Prmg", "NICE / % REAL / CURE" e "PREMITY". Por isso, ele foi trocado pela foto oficial do produto 1987, *Creatina Matéria Prima Pote 300g*.
+A imagem usada é a nova composição da mão fornecida em 9/10/2026, que tem contato físico mais convincente: os dedos passam na frente da base do pote e a palma o sustenta. O rótulo dessa imagem foi gerado por IA e tinha textos inventados ("MG / % RDV / CARB", selo "Qualidade 100% garantida", "Suplemento alimentar em pó"). Por isso, **só o pote foi substituído** pela foto oficial do produto 1987, *Creatina Matéria Prima Pote 300g*.
 
-Na versão de 9/10/2026 o pote passou a ter **escala proporcional (1,35 nos dois eixos)**, sem o alargamento de 4% da versão anterior. Ele tem a mesma largura do pote da composição aprovada, cobre o pote antigo por inteiro e não precisa de palma reconstruída; só alguns pixels de contorno entre dedo e pote foram completados. A arte final ainda precisa da aprovação do cliente.
+A montagem foi feita em camadas:
 
-Na página, a imagem não tem painel nem moldura. Ela fica ancorada na borda direita da tela, e parte do antebraço passa da base da seção, que corta o braço como uma foto sangrada. O tamanho vem de `--hand-w`, que acompanha a largura e a altura da tela (600 px em 1440 × 900, 680 px em telas acima de 1600 px e até 340 px no celular). A altura da página inicial acompanha esse tamanho, para o catálogo aparecer na primeira tela de notebooks como 1366 × 700. O centro do pote fica na altura do título.
+1. mão sem o pote da IA;
+2. pote oficial em escala proporcional (1,413 nos dois eixos, mesma largura do pote original), com a base atrás da borda da palma;
+3. dedos e palma que ficam na frente da base, recortados da imagem original. Só entra pele ligada à mão, o que evita que letras do rótulo antigo sejam confundidas com pele.
 
-**Entrada da mão:** ela começa totalmente abaixo da seção, fora do quadro, e sobe até a posição final. A subida dura 1,6 s, com a curva `cubic-bezier(0.33, 0.1, 0.2, 1)`: acelera aos poucos, chega à velocidade máxima perto de 30% do tempo e desacelera de forma contínua. Ao mesmo tempo, a mão gira de −5° para 0° em 1,8 s, a partir do antebraço, o que forma um arco curto, como o pulso assentando. Não há fade, zoom nem quique. A entrada começa 150 ms depois do carregamento da imagem, acontece uma vez e é desligada quando o sistema pede menos movimento. Se o JavaScript falhar, a imagem aparece sozinha depois de 4 s.
+Nenhum texto do rótulo foi inventado ou redesenhado. A composição anterior fica guardada no histórico do Git.
+
+Na página, a imagem não tem painel nem moldura. Ela fica ancorada na borda direita (6% do antebraço passa da tela) e a base da seção corta o braço como uma foto sangrada. O tamanho vem de `--hand-w`, que acompanha a largura e a altura da tela:
+
+- 741 px em 1440 × 900;
+- 600 px em 1366 × 700;
+- 820 px em telas acima de 1600 px;
+- até 420 px no celular;
+- abaixo de 900 px a página inicial empilha texto e imagem.
+
+**Movimento:** a versão animada (mão subindo pela base) foi testada e descartada. Como o pote fica acima da palma, qualquer entrada vertical mostra o pote subindo sozinho por cerca de meio segundo antes de a mão aparecer, o que parece montagem. A imagem é estática e aparece imediatamente. A gravação do teste está em `_referencia/capturas-v5/versao-B-animada-descartada.gif`, fora do Git.
 
 ## Identidade e cores
 
-- O logotipo é o arquivo oficial fornecido. Não há símbolo, monograma ou logotipo em texto criado para o site.
-- A cor de destaque é o amarelo do próprio logotipo, `#F8C305`, aprovado no lugar do `#FFE62D` do cadastro de Guaíba. Os neutros não puxam para o quente: branco, `#FAFAF8` (página inicial e informações), `#F5F5F3` (aviso e faixa dos combos), `#EAEAE5` (linhas), `#202020` (texto e contornos) e `#666666` (texto secundário). Tons creme ou pêssego foram retirados.
+- O logotipo é o arquivo oficial fornecido, quadrado e sem alteração. Não há símbolo, monograma ou logotipo em texto criado para o site.
+- A cor de destaque é o amarelo do próprio logotipo, `#F8C305`.
+- As superfícies são de uma única família quente, sem tom rosado (o verde nunca fica abaixo do vermelho):
+
+  | Cor | Onde aparece |
+  | --- | --- |
+  | `#F5F3EC` | cabeçalho, página inicial, combos e informações |
+  | `#FAF9F5` | catálogo, mais calmo |
+  | `#F2F0E8` | fundo das fotos de produto |
+  | `#E7E4DA` | linhas |
+  | `#8C887D` | borda dos controles, com contraste de pelo menos 3:1 |
+  | `#202020` | texto e faixa de aviso |
+  | `#5F5F5C` | texto secundário |
+
+- O rodapé é uma faixa amarela que encerra a página; nela o quadrado do logotipo se funde ao fundo.
 - O CTA da creatina é amarelo; o do catálogo tem contorno preto.
-- O amarelo aparece no botão principal, na categoria ativa, no contador da sacola, no sabor escolhido, nos marcadores dos combos e no traço dos títulos de seção.
+- Contraste verificado com `contrast_check.py` da CodeMakers-Design. Texto principal: 14,7:1 em `#F5F3EC`. Texto secundário: 5,8:1. Texto sobre amarelo: 9,9:1. Aviso: 13,6:1.
 
 ## Endereço com filtros
 
@@ -93,4 +118,6 @@ O fluxo `.github/workflows/pages.yml` só publica com push na `main`. A ação `
 
 ## Skills usadas no desenvolvimento
 
-`frontend-design` e `superpowers` (já instaladas), `web-design-guidelines` (vercel-labs/agent-skills), `cro` e `copywriting` (coreyhaines31/marketingskills). As três últimas foram instaladas no projeto com `npx skills add … -a claude-code` e ficam em `.claude/skills/`, fora do Git.
+`codemakers-design` (Code Makers, pacote fornecido), `frontend-design` e `superpowers` (já instaladas), `web-design-guidelines` (vercel-labs/agent-skills), `cro` e `copywriting` (coreyhaines31/marketingskills).
+
+A CodeMakers-Design foi instalada a partir do ZIP fornecido em `.claude/skills/codemakers-design/`. Os seus 27 testes passaram. As skills da Vercel e da Corey Haines foram instaladas com `npx skills add … -a claude-code`. Todas ficam em `.claude/skills/`, fora do Git.
