@@ -14,7 +14,7 @@ Depois abra `http://127.0.0.1:4173`. Não há dependências para instalar.
 
 ## O que esta versão faz
 
-- Cabeçalho com o logotipo oficial e página inicial em tom claro e quente, com a mão segurando a creatina num painel amarelo-claro. A mão sobe uma vez, como um gesto, e aparece parada para quem pede menos movimento no sistema.
+- Cabeçalho compacto com o logotipo oficial quadrado. Página inicial clara, com a mão segurando a creatina integrada à seção: o braço entra pela borda direita e pela base, sem caixa ou painel. Há dois caminhos: **Ver creatina Matéria Prima**, que abre a ficha do produto da foto, e **Explorar produtos**, que leva ao catálogo.
 - Vitrine com **100 produtos** em 7 categorias, visível sem cliques extras. As categorias filtram a lista, e a barra de categorias fica fixa durante a rolagem.
 - Busca por nome, marca, descrição ou sabor, sem diferenciar acentos nem maiúsculas. Também há ordenação por preço ou nome, contagem de resultados e um botão para limpar os filtros.
 - Combos em seção própria, com a lista "o que vem no combo" tirada da descrição cadastrada.
@@ -33,7 +33,7 @@ A prévia **não** tem checkout, frete, pagamento, CPF, endereço nem envio de p
 | [`vitrine.json`](./vitrine.json) | Seleção da vitrine: grupos, ordem, IDs dos 100 produtos, critérios e nomes de exibição opcionais. |
 | `assets/catalog/` | Fotos originais em WebP. A subpasta `thumbs/` guarda as miniaturas de 240 px usadas nos cartões. |
 | `assets/hero/` | Imagem da página inicial: a mão aprovada, com o pote trocado pela foto oficial do produto. |
-| `assets/marca/` | Logotipo oficial fornecido (`logo-materia-prima-original.jpg`, 150 × 150 px, sem alteração) e a versão usada no site (`logo-materia-prima-faixa.png`), que só tira a margem amarela vazia de cima e de baixo, com autorização. |
+| `assets/marca/` | Logotipo oficial fornecido (`logo-materia-prima-original.jpg`, 150 × 150 px), usado sem nenhuma alteração: 52 px no cabeçalho, 44 px no celular e no rodapé, e também como ícone da aba. |
 | [`scripts/gerar-miniaturas.py`](./scripts/gerar-miniaturas.py) | Gera as miniaturas a partir de `vitrine.json` (precisa de Pillow). |
 | [`LEVANTAMENTO.md`](./LEVANTAMENTO.md) | Método da coleta, regras de Guaíba e pendências de Passo Fundo. |
 
@@ -72,12 +72,15 @@ A composição aprovada (mão, pose e enquadramento) foi mantida. O pote gerado 
 
 Na versão de 9/10/2026 o pote passou a ter **escala proporcional (1,35 nos dois eixos)**, sem o alargamento de 4% da versão anterior. Ele tem a mesma largura do pote da composição aprovada, cobre o pote antigo por inteiro e não precisa de palma reconstruída; só alguns pixels de contorno entre dedo e pote foram completados. A arte final ainda precisa da aprovação do cliente.
 
-Na página, a imagem fica num painel amarelo-claro. O braço sai pelo canto inferior direito do painel, e o conjunto mão + pote fica centralizado na vertical. A entrada dura 1,25 s, com subida de 84 px (56 px no celular) e a curva `cubic-bezier(0.38, 0.06, 0.2, 1)`: começa devagar e assenta sem quique. Ela acontece uma vez e é desligada quando o sistema pede menos movimento.
+Na página, a imagem não tem painel nem moldura. Ela fica ancorada na borda direita da tela, e parte do antebraço passa da base da seção, que corta o braço como uma foto sangrada. O tamanho vem de `--hand-w`, que acompanha a largura e a altura da tela (600 px em 1440 × 900, 680 px em telas acima de 1600 px e até 340 px no celular). A altura da página inicial acompanha esse tamanho, para o catálogo aparecer na primeira tela de notebooks como 1366 × 700. O centro do pote fica na altura do título.
+
+**Entrada da mão:** ela começa totalmente abaixo da seção, fora do quadro, e sobe até a posição final. A subida dura 1,6 s, com a curva `cubic-bezier(0.33, 0.1, 0.2, 1)`: acelera aos poucos, chega à velocidade máxima perto de 30% do tempo e desacelera de forma contínua. Ao mesmo tempo, a mão gira de −5° para 0° em 1,8 s, a partir do antebraço, o que forma um arco curto, como o pulso assentando. Não há fade, zoom nem quique. A entrada começa 150 ms depois do carregamento da imagem, acontece uma vez e é desligada quando o sistema pede menos movimento. Se o JavaScript falhar, a imagem aparece sozinha depois de 4 s.
 
 ## Identidade e cores
 
 - O logotipo é o arquivo oficial fornecido. Não há símbolo, monograma ou logotipo em texto criado para o site.
-- A cor de destaque é o amarelo do próprio logotipo, `#F8C305`, aprovado no lugar do `#FFE62D` do cadastro de Guaíba. Os neutros são quentes: `#FAFAF7`, `#FFF8DC`, `#F4F4F0`, `#EAEAE5`, `#202020` e `#666666`.
+- A cor de destaque é o amarelo do próprio logotipo, `#F8C305`, aprovado no lugar do `#FFE62D` do cadastro de Guaíba. Os neutros não puxam para o quente: branco, `#FAFAF8` (página inicial e informações), `#F5F5F3` (aviso e faixa dos combos), `#EAEAE5` (linhas), `#202020` (texto e contornos) e `#666666` (texto secundário). Tons creme ou pêssego foram retirados.
+- O CTA da creatina é amarelo; o do catálogo tem contorno preto.
 - O amarelo aparece no botão principal, na categoria ativa, no contador da sacola, no sabor escolhido, nos marcadores dos combos e no traço dos títulos de seção.
 
 ## Endereço com filtros

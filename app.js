@@ -853,12 +853,25 @@ function celebrateAdd(product, fromRect) {
 
 function setupHero() {
   const image = $("#hero-image");
-  const reveal = () => requestAnimationFrame(() => requestAnimationFrame(() => image.classList.add("is-in")));
+  // Pequena pausa depois do carregamento, para a entrada não competir com o primeiro desenho da página.
+  const reveal = () => setTimeout(() => requestAnimationFrame(() => image.classList.add("is-in")), 150);
   if (image.complete && image.naturalWidth > 0) reveal();
   else {
     image.addEventListener("load", reveal, { once: true });
     image.addEventListener("error", () => image.classList.add("is-in"), { once: true });
   }
+
+  // CTA da foto: abre a ficha do produto exato da embalagem; sem ele na vitrine, mostra as creatinas.
+  const button = $("#hero-product");
+  button.addEventListener("click", () => {
+    const product = state.products.get(Number(button.dataset.productId));
+    if (product) {
+      openProduct(product);
+      return;
+    }
+    setGroup("creatinas");
+    $("#produtos").scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth" });
+  });
 }
 
 /* ---------- Page wiring ---------- */

@@ -8,9 +8,9 @@
     <title>Matéria Prima · Passo Fundo</title>
     <link rel="preload" href="assets/montserrat.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="assets/marca/logo-materia-prima-original.jpg" type="image/jpeg" />
-    <link rel="preload" as="image" href="assets/hero/mao-creatina.webp" imagesrcset="assets/hero/mao-creatina-640.webp 640w, assets/hero/mao-creatina.webp 1120w" imagesizes="(min-width: 700px) 420px, 75vw" />
+    <link rel="preload" as="image" href="assets/hero/mao-creatina.webp" imagesrcset="assets/hero/mao-creatina-640.webp 640w, assets/hero/mao-creatina.webp 1120w" imagesizes="(min-width: 700px) min(46vw, 600px), 78vw" />
     <link rel="stylesheet" href="styles.css" />
-    <script>document.documentElement.classList.add("js");</script>
+    <script>document.documentElement.classList.add("js");setTimeout(function(){var i=document.getElementById("hero-image");if(i)i.classList.add("is-in");},4000);</script>
     <script src="app.js" defer></script>
   </head>
   <body>
@@ -21,7 +21,7 @@
     <header class="site-header">
       <div class="site-header__inner shell">
         <a class="brand" href="#inicio" translate="no">
-          <img src="assets/marca/logo-materia-prima-faixa.png" width="150" height="54" alt="Matéria Prima Suplementos, voltar ao início" />
+          <img src="assets/marca/logo-materia-prima-original.jpg" width="52" height="52" alt="Matéria Prima Suplementos, voltar ao início" />
         </a>
         <nav class="main-nav" id="main-nav" aria-label="Navegação principal">
           <a href="#produtos">Produtos</a>
@@ -48,11 +48,13 @@
         <div class="hero__copy">
           <p class="hero__store">Loja de suplementos em Passo Fundo</p>
           <h1 id="hero-title">Sua evolução começa com o essencial.</h1>
-          <p class="hero__text">Creatinas, whey protein, pré-treinos e combos para acompanhar sua rotina. Escolha por categoria e veja preço e sabores de cada produto.</p>
+          <p class="hero__text">Creatinas, whey protein, pré-treinos e combos para acompanhar sua rotina.</p>
           <div class="hero__actions">
-            <a class="button button--primary" href="#produtos">Explorar produtos</a>
-            <a class="text-button" href="#produtos" data-nav-group="combos">Ver combos</a>
+            <!-- A embalagem da foto é a foto oficial do produto 1987 do catálogo (Creatina Matéria Prima Pote 300g). -->
+            <button class="button button--primary" type="button" id="hero-product" data-product-id="1987">Ver creatina Matéria Prima</button>
+            <a class="button button--outline" href="#produtos">Explorar produtos</a>
           </div>
+          <p class="hero__caption">Na foto: Creatina Matéria Prima, pote de 300&nbsp;g.</p>
         </div>
         <div class="hero__media">
           <img
@@ -60,7 +62,7 @@
             id="hero-image"
             src="assets/hero/mao-creatina.webp"
             srcset="assets/hero/mao-creatina-640.webp 640w, assets/hero/mao-creatina.webp 1120w"
-            sizes="(min-width: 700px) 420px, 75vw"
+            sizes="(min-width: 700px) min(46vw, 600px), 78vw"
             width="1120"
             height="1106"
             alt="Mão segurando um pote de Creatina Matéria Prima de 300 gramas"
@@ -139,7 +141,7 @@
     <footer class="site-footer">
       <div class="site-footer__inner shell">
         <span class="brand brand--small" translate="no">
-          <img src="assets/marca/logo-materia-prima-faixa.png" width="150" height="54" alt="Matéria Prima Suplementos" loading="lazy" />
+          <img src="assets/marca/logo-materia-prima-original.jpg" width="44" height="44" alt="Matéria Prima Suplementos" loading="lazy" />
         </span>
         <p>Prévia demonstrativa. Catálogo de referência: <a href="https://app.c10.site/301-materia-prima-guaiba" target="_blank" rel="noreferrer">Matéria Prima Guaíba</a>.</p>
         <a class="text-button" href="#inicio">Voltar ao topo</a>
