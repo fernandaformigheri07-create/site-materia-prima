@@ -1,0 +1,222 @@
+{
+  "$descricao": "Seleção demonstrativa da vitrine Matéria Prima Passo Fundo. Usa apenas IDs existentes em catalogo.json (fonte original, não alterada). Para trocar um produto, substitua o ID no grupo correspondente; a ordem da lista é a ordem padrão de exibição.",
+  "criadoEm": "2026-10-09",
+  "fonte": "catalogo.json",
+  "criterios": [
+    "Somente produtos existentes no cadastro de referência (Guaíba), com foto local válida e preço.",
+    "Variedade de marcas, formatos (pote, refil, cápsulas, dose) e pesos dentro de cada grupo.",
+    "Itens quase idênticos da mesma marca foram limitados (ex.: várias creatinas 3vs, combos com o mesmo whey).",
+    "Combos com descrição genérica (sem marca do whey) foram preteridos quando havia alternativas mais claras.",
+    "Com duas opções equivalentes, preferimos a foto em fundo branco, para a vitrine ficar uniforme.",
+    "Diuréticos e pré-hormonais não entraram na vitrine demonstrativa; continuam no catálogo completo.",
+    "A ordem não representa ranking de vendas ou popularidade: nenhum dado de vendas foi usado."
+  ],
+  "nomesDeExibicao": {
+    "1946": "BCAA 3vs Nutrition Pote (250g)",
+    "1958": "Colágeno Nutrify Renew Lata (300g)",
+    "2034": "Melatonina Black Skull Pote (120 caps)",
+    "2174": "Whey Profit Labs Refil (900g)",
+    "2188": "Ômega 3 Integralmedica Selo IFOS Pote (60 caps)",
+    "2383": "Ômega 3 Dux Nutrition Selo MEG-3 Pote (60 caps)",
+    "25579": "Creatina Integralmedica (120 caps)",
+    "$explicacao": "Opcional. Nomes do cadastro que não dizem o tipo do produto recebem o tipo informado na própria descrição do item. O nome original continua em catalogo.json e na busca."
+  },
+  "groups": [
+    {
+      "id": "combos",
+      "name": "Combos",
+      "title": "Combos promocionais",
+      "intro": "Kits prontos com whey, creatina e outros itens. A composição de cada combo é a cadastrada na loja de referência.",
+      "sourceCategories": [
+        "COMBOS PROMOCIONAIS"
+      ],
+      "productIds": [
+        1961,
+        24735,
+        2420,
+        1964,
+        2417,
+        26587,
+        1963,
+        2422,
+        26130,
+        1962,
+        2423,
+        2424,
+        26588,
+        27327,
+        28399
+      ]
+    },
+    {
+      "id": "creatinas",
+      "name": "Creatinas",
+      "title": "Creatinas",
+      "intro": "Creatina pura em pote, refil e cápsulas.",
+      "sourceCategories": [
+        "CREATINAS 100% PURAS"
+      ],
+      "productIds": [
+        1983,
+        1987,
+        27317,
+        2000,
+        1976,
+        1977,
+        25581,
+        26201,
+        1978,
+        1979,
+        25579,
+        1982,
+        1985,
+        40054,
+        1986
+      ]
+    },
+    {
+      "id": "whey",
+      "name": "Whey",
+      "title": "Whey protein",
+      "intro": "Concentrado, isolado, hidrolisado, blends e doses individuais.",
+      "sourceCategories": [
+        "WHEY 100% CONCENTRADO, 3W & WHEY BLENDS",
+        "WHEY 100% ISOLADO & HIDROLISADO",
+        "DOSES DE WHEY"
+      ],
+      "productIds": [
+        2185,
+        2173,
+        2178,
+        2186,
+        2174,
+        2176,
+        2144,
+        2033,
+        2153,
+        2150,
+        2385,
+        2160,
+        2164,
+        2163,
+        26244,
+        2155,
+        26006,
+        2171,
+        2005,
+        2006
+      ]
+    },
+    {
+      "id": "pre-treinos",
+      "name": "Pré-treinos",
+      "title": "Pré-treinos",
+      "intro": "Com cafeína e opções sem estimulantes para treinar à noite.",
+      "sourceCategories": [
+        "PRÉ - TREINO",
+        "PRE TREINO SEM CAFEINA"
+      ],
+      "productIds": [
+        2064,
+        2077,
+        2063,
+        2068,
+        2081,
+        2087,
+        2089,
+        2085,
+        2072,
+        2079,
+        2084,
+        2414,
+        30647,
+        2080,
+        39656
+      ]
+    },
+    {
+      "id": "saude",
+      "name": "Vitaminas e saúde",
+      "title": "Vitaminas e saúde",
+      "intro": "Multivitamínicos, minerais, ômega 3, colágeno e sono.",
+      "sourceCategories": [
+        "MULTIVITAMINICOS",
+        "VITAMINA C",
+        "VITAMINA D",
+        "VITAMINAS",
+        "ÔMEGA 3",
+        "COLÁGENO HIDROLISADO",
+        "MELATONINA & TRIPTOFANO"
+      ],
+      "productIds": [
+        2135,
+        40165,
+        26045,
+        29594,
+        29595,
+        2141,
+        2188,
+        2383,
+        1958,
+        2034
+      ]
+    },
+    {
+      "id": "alimentos",
+      "name": "Barras e alimentos",
+      "title": "Barras e alimentos",
+      "intro": "Barras de proteína e pastas de amendoim.",
+      "sourceCategories": [
+        "BARRA DE PROTEINA",
+        "PASTA DE AMENDOIM"
+      ],
+      "productIds": [
+        1938,
+        1937,
+        1945,
+        1935,
+        26062,
+        2040,
+        2046,
+        26259,
+        2037,
+        2047
+      ]
+    },
+    {
+      "id": "outros",
+      "name": "Outros",
+      "title": "Outros suplementos e acessórios",
+      "intro": "Aminoácidos, energia, termogênicos, hipercalórico e itens para o treino.",
+      "sourceCategories": [
+        "AMINOACIDOS BCAA",
+        "BETA ALANINA",
+        "L-ARGININA & VASODILATADORES",
+        "ENDURANCE",
+        "HIPERCÁLORICOS",
+        "TERMOGENICOS & CAFEINAS",
+        "PRÉ - HORMONAL",
+        "COQUETELEIRAS",
+        "GALÃO DE AGUA",
+        "ACESSORIOS"
+      ],
+      "productIds": [
+        1946,
+        2601,
+        1952,
+        2123,
+        2061,
+        2110,
+        2104,
+        2109,
+        2027,
+        2009,
+        2013,
+        1966,
+        2017,
+        1927,
+        1932
+      ]
+    }
+  ]
+}

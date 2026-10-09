@@ -1,32 +1,70 @@
 # Matéria Prima · Passo Fundo
 
-Primeira versão estática e responsiva da vitrine. O catálogo, os preços, as opções e as fotos vieram da loja de Guaíba e aparecem identificados como referência. Os dados comerciais de Passo Fundo continuam em confirmação.
+Prévia estática e responsiva da loja, em modo de demonstração. Produtos, preços, opções e fotos vêm da loja Matéria Prima de Guaíba e aparecem como referência. Os dados comerciais de Passo Fundo ainda não foram confirmados, e a prévia não vende nada.
 
 ## Prévia local
 
-Na pasta `site-materia-prima`, execute:
+Na pasta do projeto, execute:
 
 ```sh
-python3 -m http.server 4173 --bind 127.0.0.1
+python -m http.server 4173 --bind 127.0.0.1
 ```
 
-Abra a prévia local no navegador da sessão na porta `4173`. O ambiente de desenvolvimento não precisa instalar dependências.
+Depois abra `http://127.0.0.1:4173`. Não há dependências para instalar.
 
-## O que funciona nesta versão
+## O que esta versão faz
 
-- Navegação responsiva e atalhos para destaques, catálogo e compra.
-- Busca de produto e opção/sabor, filtro por categoria e ordenação por preço ou nome.
-- Detalhe de produto com fotos, descrição e opções lidas da ficha C10.
-- Sacola com quantidades e subtotal; conteúdo do carrinho permanece no `localStorage` deste navegador.
-- Revisão demonstrativa de entrega ou retirada e escolha de uma forma de pagamento cadastrada em Guaíba.
-- Campos de endereço são apenas para demonstração: use dados fictícios. Permanecem só na memória da página e limpam quando a revisão fecha.
+- Página inicial branca e minimalista com a imagem da mão segurando a creatina. A imagem entra uma vez, de baixo para cima, e aparece parada para quem pede menos movimento no sistema.
+- Vitrine com **100 produtos** em 7 categorias, visível sem cliques extras. As categorias filtram a lista, e a barra de categorias fica fixa durante a rolagem.
+- Busca por nome, marca, descrição ou sabor, sem diferenciar acentos nem maiúsculas. Também há ordenação por preço ou nome, contagem de resultados e um botão para limpar os filtros.
+- Combos em seção própria, com a lista "o que vem no combo" tirada da descrição cadastrada.
+- Detalhe do produto com fotos, sabores e cores. As opções obrigatórias são validadas antes de adicionar. As opcionais aceitam "Sem preferência".
+- Sacola com quantidades (de 1 a 99), remoção, botão de esvaziar com confirmação e subtotal. Ela fica salva no `localStorage` deste navegador.
+- Ao adicionar um produto, uma miniatura voa até o ícone da sacola e o contador confirma a mudança. A sacola não abre sozinha.
 
-O fluxo não envia pedido, não valida endereço ou cobertura, não calcula frete para Passo Fundo, não processa pagamento e não pede dados de cartão. As opções de Guaíba são referências separadas e não são assumidas como regras de Passo Fundo.
+A prévia **não** tem checkout, frete, pagamento, CPF, endereço nem envio de pedidos. O antigo passo de entrega e pagamento de demonstração foi retirado. A sacola é a revisão final.
 
-## Arquivos de dados
+## Arquivos
 
-- [`catalogo.json`](./catalogo.json): 212 produtos, categorias, preços, opções, imagens locais e originais, links de origem, regras de recebimento e pagamentos da loja de referência.
-- [`catalogo.csv`](./catalogo.csv): a mesma lista em formato de planilha.
-- [`LEVANTAMENTO.md`](./LEVANTAMENTO.md): método, detalhes de checkout e regras de entrega/retirada/pagamento de Guaíba, estado das confirmações de Passo Fundo e perfis sociais.
+| Arquivo | Conteúdo |
+| --- | --- |
+| [`catalogo.json`](./catalogo.json) | Fonte original: 212 produtos da loja de Guaíba. **Não é alterado** pela vitrine. |
+| [`catalogo.csv`](./catalogo.csv) | A mesma lista em formato de planilha. |
+| [`vitrine.json`](./vitrine.json) | Seleção da vitrine: grupos, ordem, IDs dos 100 produtos, critérios e nomes de exibição opcionais. |
+| `assets/catalog/` | Fotos originais em WebP. A subpasta `thumbs/` guarda as miniaturas de 240 px usadas nos cartões. |
+| `assets/hero/` | Imagem da página inicial: a mão aprovada, com o pote trocado pela foto oficial do produto. |
+| [`scripts/gerar-miniaturas.py`](./scripts/gerar-miniaturas.py) | Gera as miniaturas a partir de `vitrine.json` (precisa de Pillow). |
+| [`LEVANTAMENTO.md`](./LEVANTAMENTO.md) | Método da coleta, regras de Guaíba e pendências de Passo Fundo. |
 
-A fonte consultada é [Matéria Prima Guaíba no C10](https://app.c10.site/301-materia-prima-guaiba). As 334 fotos do catálogo foram copiadas localmente e convertidas para WebP para carregar sem dependência do S3.
+### Como trocar produtos da vitrine
+
+1. Edite `productIds` do grupo em `vitrine.json`, usando IDs existentes em `catalogo.json`. A ordem da lista é a "Ordem padrão" do site.
+2. Rode `python scripts/gerar-miniaturas.py`. Se faltar alguma miniatura, o site usa a foto original.
+
+## Seleção da vitrine
+
+| Grupo | Produtos | Categorias de origem |
+| --- | ---: | --- |
+| Combos promocionais | 15 | Combos promocionais |
+| Creatinas | 15 | Creatinas 100% puras |
+| Whey protein | 20 | Whey concentrado/blends, isolado/hidrolisado, doses |
+| Pré-treinos | 15 | Pré-treino, pré-treino sem cafeína |
+| Vitaminas e saúde | 10 | Multivitamínicos, vitaminas, ômega 3, colágeno, melatonina |
+| Barras e alimentos | 10 | Barras de proteína, pastas de amendoim |
+| Outros suplementos e acessórios | 15 | BCAA, beta-alanina, arginina, ZMA, termogênico, cafeína, hipercalórico, endurance, coqueteleira, galão, acessórios |
+| **Total** | **100** | |
+
+Todos os grupos tinham itens suficientes, então não foi preciso redistribuir a contagem. Os critérios estão em `vitrine.json`. Em resumo:
+
+- só entraram itens do cadastro com foto e preço;
+- buscamos variedade de marcas e formatos;
+- limitamos itens quase iguais;
+- preferimos combos com descrição clara;
+- preferimos fotos em fundo branco quando havia equivalentes;
+- diuréticos e pré-hormonais ficaram de fora da vitrine.
+
+Nenhum dado de vendas ou popularidade foi usado.
+
+## Imagem da página inicial
+
+A composição aprovada (mão, pose e enquadramento) foi mantida. O pote gerado por IA tinha textos errados no rótulo, como "Mhts la Prmg", "NICE / % REAL / CURE" e "PREMITY". Por isso, ele foi trocado pela foto oficial do produto 1987, *Creatina Matéria Prima Pote 300g*, com recorte, encaixe e preenchimento da palma. A largura do pote foi ajustada em cerca de 4% para assentar na mão. A arte final ainda precisa da aprovação do cliente.

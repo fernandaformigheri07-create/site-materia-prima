@@ -74,3 +74,21 @@ Por isso, **não há produtos, preços, disponibilidade, endereço, horários, t
 O site em [`index.html`](./index.html) tem navegação responsiva, seleção inicial enxuta, busca, 28 filtros de categoria, ordenação por preço/nome, detalhe de produto com fotos e opções, sacola persistida apenas neste navegador e revisão demonstrativa com entrega/retirada, taxas não aplicadas e formas de pagamento de referência.
 
 O endereço de demonstração só permanece na memória da página, não é consultado nem enviado; os campos limpam ao fechar a revisão. Não há integração com C10 para criar pedidos ou pagamentos. A prévia não foi publicada.
+
+## Segunda versão da prévia (9 de outubro de 2026)
+
+A prévia foi reestruturada na branch `redesign-minimalista`:
+
+- a vitrine passou a mostrar 100 produtos selecionados (`vitrine.json`), em vez de 4 destaques e um catálogo escondido;
+- o passo de entrega e pagamento de demonstração saiu, e a sacola virou a revisão final;
+- os dados de Guaíba continuam completos em `catalogo.json`. Fretes e pagamentos de Guaíba deixaram de aparecer na página.
+
+Referência visual: gravação da loja C10 de Guaíba, com cartões horizontais em duas colunas, catálogo inteiro dividido por categorias e seletor de categoria fixo no topo.
+
+### Pendências para a versão comercial
+
+- Confirmar em Passo Fundo: produtos, preços, estoque, endereço, horários, áreas e taxas de entrega e formas de pagamento.
+- Aprovar a imagem da página inicial, que é a mão aprovada com o pote trocado pela foto oficial do produto 1987.
+- Revisar erros de digitação do cadastro de origem, mantidos como estão: "Penuat"/"Peanut", "Protrein", "Atlhetica", "Gormert", "Concetrado".
+- Logotipo oficial da unidade Passo Fundo: o site usa um logotipo provisório em texto.
+- Perfis oficiais em redes sociais (continuam sem confirmação).

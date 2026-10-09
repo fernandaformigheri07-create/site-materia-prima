@@ -3,165 +3,202 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#ffe62d" />
-    <meta name="description" content="Prévia de loja online Matéria Prima Passo Fundo. Catálogo de referência da unidade Guaíba; dados locais em confirmação." />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="description" content="Prévia da loja Matéria Prima Passo Fundo: creatinas, whey protein, pré-treinos e suplementos. Produtos e preços de referência, sem venda online." />
     <title>Matéria Prima · Passo Fundo</title>
+    <link rel="preload" href="assets/montserrat.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" as="image" href="assets/hero/mao-creatina.webp" imagesrcset="assets/hero/mao-creatina-640.webp 640w, assets/hero/mao-creatina.webp 1120w" imagesizes="(min-width: 700px) 560px, 62vw" />
     <link rel="stylesheet" href="styles.css" />
+    <script>document.documentElement.classList.add("js");</script>
     <script src="app.js" defer></script>
   </head>
   <body>
-    <div class="announcement" role="status">
-      <span class="announcement__dot" aria-hidden="true"></span>
-      Catálogo e preços de referência: Guaíba <span class="announcement__separator">·</span> Passo Fundo em confirmação
-      <a href="#sobre-os-dados">Ver detalhes</a>
-    </div>
+    <a class="skip-link" href="#produtos">Ir para os produtos</a>
+
+    <p class="demo-bar">Loja em demonstração<span class="demo-bar__more">. Produtos e preços são de referência e ainda serão confirmados para Passo Fundo</span><span class="demo-bar__short">: preços de referência</span>.</p>
 
     <header class="site-header">
-      <a class="brand" href="#inicio" aria-label="Matéria Prima, início">
-        <span class="brand__mark" aria-hidden="true"><span></span><span></span><span></span></span>
-        <span class="brand__name">matéria<span>prima</span></span>
-      </a>
-      <nav class="main-nav" aria-label="Navegação principal">
-        <a class="main-nav__link main-nav__link--active" href="#inicio">Início</a>
-        <a class="main-nav__link" href="#destaques">Destaques</a>
-        <a class="main-nav__link" href="#catalogo">Catálogo</a>
-        <a class="main-nav__link" href="#recebimento">Como comprar</a>
-      </nav>
-      <div class="header-actions">
-        <button class="icon-button cart-trigger" id="open-cart" type="button" aria-label="Abrir sacola" aria-expanded="false">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.1 12H6.1L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
-          <span class="cart-count" id="cart-count">0</span>
-        </button>
-        <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menu"><span></span><span></span></button>
+      <div class="site-header__inner shell">
+        <a class="brand" href="#inicio" aria-label="Matéria Prima Passo Fundo, voltar ao início">
+          <span class="brand__mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span class="brand__name">matéria prima<small>Passo Fundo</small></span>
+        </a>
+        <nav class="main-nav" id="main-nav" aria-label="Navegação principal">
+          <a href="#produtos">Produtos</a>
+          <a href="#produtos" data-nav-group="combos">Combos</a>
+          <a href="#informacoes">Informações</a>
+        </nav>
+        <div class="header-actions">
+          <button class="cart-button" id="open-cart" type="button" aria-haspopup="dialog">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.1 12H6.1L5 8Z" /><path d="M9 9V6a3 3 0 0 1 6 0v3" /></svg>
+            <span class="visually-hidden">Abrir sacola,</span>
+            <span class="cart-button__count" id="cart-count" data-count="0">0</span>
+            <span class="visually-hidden" id="cart-count-label">itens</span>
+          </button>
+          <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="main-nav">
+            <span class="visually-hidden">Menu</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16" /></svg>
+          </button>
+        </div>
       </div>
     </header>
 
-    <nav class="mobile-nav" id="mobile-nav" aria-label="Navegação móvel" hidden>
-      <a href="#inicio">Início</a><a href="#destaques">Destaques</a><a href="#catalogo">Catálogo</a><a href="#recebimento">Como comprar</a>
-    </nav>
-
     <main>
-      <section class="hero page-shell" id="inicio">
+      <section class="hero" id="inicio" aria-labelledby="hero-title">
         <div class="hero__copy">
-          <div class="eyebrow"><span class="eyebrow__line"></span> MATÉRIA PRIMA · PASSO FUNDO</div>
-          <h1>Suplementação<br />no seu <em>ritmo.</em></h1>
-          <p class="hero__text">Encontre o que procura com uma vitrine simples, preços à vista e compra sem complicação. Esta primeira versão usa o catálogo consultado na unidade de Guaíba enquanto os dados de Passo Fundo são confirmados.</p>
+          <p class="hero__store">Matéria Prima Suplementos, Passo Fundo</p>
+          <h1 id="hero-title">Sua evolução começa com o essencial.</h1>
+          <p class="hero__text">Creatinas, proteínas e suplementos para acompanhar sua rotina.</p>
           <div class="hero__actions">
-            <a class="button button--dark" href="#destaques">Ver produtos <span aria-hidden="true">↘</span></a>
-            <a class="text-link" href="#recebimento">Como comprar</a>
+            <a class="button button--primary" href="#produtos">Explorar produtos</a>
+            <button class="text-button" type="button" id="hero-product">Ver a creatina da foto</button>
           </div>
-          <div class="hero__trust"><span class="check-mark" aria-hidden="true">✓</span> Produtos e valores identificados como referência Guaíba.</div>
         </div>
-        <div class="hero-art" aria-label="Produto de referência do catálogo Guaíba">
-          <div class="hero-art__eyebrow"><span></span> EM DESTAQUE · REFERÊNCIA GUAÍBA</div>
-          <div class="hero-art__image-wrap"><img src="assets/catalog/item-1983-1.webp" alt="Creatina Matéria Prima, embalagem do catálogo Guaíba" /></div>
-          <div class="hero-art__price"><span>Creatina Matéria Prima · ref. Guaíba</span><strong>R$ 37,90</strong></div>
-          <div class="hero-art__stamp" aria-hidden="true">FEITO<br />PRA<br />VOCÊ</div>
-          <span class="hero-art__spark hero-art__spark--one" aria-hidden="true">✳</span>
-          <span class="hero-art__spark hero-art__spark--two" aria-hidden="true">✳</span>
+        <div class="hero__media">
+          <img
+            class="hero__image"
+            id="hero-image"
+            src="assets/hero/mao-creatina.webp"
+            srcset="assets/hero/mao-creatina-640.webp 640w, assets/hero/mao-creatina.webp 1120w"
+            sizes="(min-width: 700px) 560px, 62vw"
+            width="1120"
+            height="1071"
+            alt="Mão segurando um pote de Creatina Matéria Prima de 300 gramas"
+            fetchpriority="high"
+            decoding="async"
+          />
         </div>
       </section>
 
-      <section class="quick-strip page-shell" aria-label="Vantagens da vitrine">
-        <div class="quick-strip__item"><span class="quick-icon quick-icon--search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.4 4.4"/></svg></span><span><strong>Encontre rápido</strong><small>Busca por nome ou categoria</small></span></div>
-        <div class="quick-strip__divider"></div>
-        <div class="quick-strip__item"><span class="quick-icon quick-icon--bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg></span><span><strong>Preço sempre visível</strong><small>Opções e valores no produto</small></span></div>
-        <div class="quick-strip__divider"></div>
-        <div class="quick-strip__item"><span class="quick-icon quick-icon--pin"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.3"/></svg></span><span><strong>Compra organizada</strong><small>Monte a sacola e revise</small></span></div>
-      </section>
-
-      <section class="featured-section page-shell" id="destaques">
-        <div class="section-heading section-heading--featured">
-          <div><div class="eyebrow"><span class="eyebrow__line"></span> PRA COMEÇAR</div><h2>Encontre seu próximo<br class="desktop-break" /> essencial.</h2></div>
-          <p>Uma seleção de categorias diferentes para você explorar. Produtos e preços são da loja de referência em Guaíba.</p>
-        </div>
-        <div class="product-grid product-grid--featured" id="featured-grid" aria-live="polite"></div>
-        <div class="featured-actions"><span>Preço e disponibilidade em Passo Fundo: não confirmados.</span><a class="text-link" href="#catalogo" id="open-full-catalog">Explorar os <strong id="featured-total">212</strong> produtos <span aria-hidden="true">→</span></a></div>
-      </section>
-
-      <section class="catalog-section page-shell" id="catalogo">
-        <div class="section-heading">
-          <div><div class="eyebrow"><span class="eyebrow__line"></span> LOJA DE REFERÊNCIA · GUAÍBA</div><h2>Catálogo completo</h2></div>
-          <div class="section-heading__right" id="catalog-controls" hidden>
-            <label class="search-field" for="product-search">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.4 4.4"/></svg>
-              <input id="product-search" type="search" placeholder="Buscar produto" autocomplete="off" />
-              <kbd>/</kbd>
+      <section class="catalog" id="produtos" aria-labelledby="catalog-title">
+        <div class="catalog__head shell">
+          <div class="catalog__title">
+            <h2 id="catalog-title">Produtos</h2>
+            <p class="catalog__status" id="catalog-status" aria-live="polite">Carregando produtos…</p>
+          </div>
+          <div class="catalog__tools">
+            <label class="search-field">
+              <span class="visually-hidden">Buscar produto</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" /><path d="m16 16 4.4 4.4" /></svg>
+              <input id="product-search" type="search" placeholder="Buscar por nome, marca ou sabor" autocomplete="off" enterkeyhint="search" />
             </label>
-            <span class="catalog-count" id="catalog-count">Carregando catálogo…</span>
+            <label class="sort-field">
+              <span>Ordenar</span>
+              <select id="product-sort">
+                <option value="default">Ordem padrão</option>
+                <option value="price-low">Menor preço</option>
+                <option value="price-high">Maior preço</option>
+                <option value="name">Nome (A–Z)</option>
+              </select>
+            </label>
           </div>
         </div>
-        <div class="catalog-teaser" id="catalog-teaser"><span class="catalog-teaser__count" id="catalog-teaser-count">212 produtos em 28 categorias</span><p>Explore o catálogo completo da loja de Guaíba. Use busca e categorias para encontrar um item.</p><button class="button button--dark" id="open-full-catalog-inline" type="button">Abrir catálogo completo <span aria-hidden="true">→</span></button></div>
-        <div class="catalog-toolbar" id="catalog-toolbar" hidden>
-          <div class="category-list" id="category-list" aria-label="Categorias do catálogo"></div>
-          <label class="sort-field" for="product-sort"><span>Ordenar</span><select id="product-sort" aria-label="Ordenar produtos"><option value="featured">Relevância</option><option value="price-low">Menor preço</option><option value="price-high">Maior preço</option><option value="name">Nome A–Z</option></select></label>
+
+        <nav class="category-bar" aria-label="Categorias de produtos">
+          <div class="category-bar__inner shell">
+            <div class="category-list" id="category-list"></div>
+          </div>
+        </nav>
+
+        <div class="catalog__body shell">
+          <div class="filter-summary" id="filter-summary" hidden>
+            <p id="filter-summary-text"></p>
+            <button class="text-button" type="button" id="clear-filters">Limpar filtros</button>
+          </div>
+          <div id="catalog-sections"></div>
+          <div class="empty-state" id="empty-state" hidden>
+            <h3>Nenhum produto encontrado</h3>
+            <p id="empty-state-text">Confira a grafia ou procure por outra marca, sabor ou categoria.</p>
+            <button class="button button--secondary" type="button" id="empty-clear">Limpar busca e filtros</button>
+          </div>
+          <p class="catalog__error" id="catalog-error" hidden>Não foi possível carregar os produtos. Atualize a página para tentar de novo.</p>
         </div>
-        <div class="product-grid" id="product-grid" aria-live="polite" hidden></div>
-        <div class="no-results" id="no-results" hidden>Nenhum item corresponde à busca. Tente outro nome ou categoria.</div>
-        <div class="catalog-footnote" id="catalog-footnote" hidden><span class="status-dot"></span> Valores e fotos vistos na loja de Guaíba. Estoque e dados comerciais de Passo Fundo ainda precisam de confirmação.</div>
       </section>
 
-      <section class="receiving-section" id="recebimento">
-        <div class="page-shell receiving-layout">
-          <div class="receiving-intro">
-            <div class="eyebrow eyebrow--light"><span class="eyebrow__line"></span> DO SEU JEITO</div>
-            <h2>Escolha como<br />quer comprar.</h2>
-            <p>A vitrine prepara as opções de entrega e retirada. O endereço, a área atendida e a taxa de Passo Fundo ainda precisam ser confirmados.</p>
-            <button class="button button--light" id="open-checkout" type="button">Ver checkout de demonstração <span aria-hidden="true">→</span></button>
+      <section class="info shell" id="informacoes" aria-labelledby="info-title">
+        <h2 id="info-title">Antes de comprar</h2>
+        <div class="info__grid">
+          <div>
+            <h3>Preços de referência</h3>
+            <p>Produtos, fotos e valores foram consultados na loja Matéria Prima de Guaíba em <span id="collected-at">8 de outubro de 2026</span>. A unidade de Passo Fundo ainda vai confirmar preços e estoque.</p>
           </div>
-          <div class="receiving-options">
-            <article class="receiving-card"><span class="receiving-card__number">01</span><span class="receiving-card__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v11H3zM14 11h4l3 3v4h-7z"/><circle cx="7.5" cy="18.5" r="1.8"/><circle cx="17.5" cy="18.5" r="1.8"/></svg></span><h3>Entrega</h3><p>Endereço, cobertura, prazo e taxa em Passo Fundo: <strong>não confirmados.</strong></p><span class="receiving-card__status">Sem frete calculado nesta prévia</span></article>
-            <article class="receiving-card"><span class="receiving-card__number">02</span><span class="receiving-card__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10h16M5 10l1-5h12l1 5M6 10v9h12v-9M9 19v-5h6v5"/><path d="M3 10a2 2 0 0 0 4 0 2 2 0 0 0 4 0 2 2 0 0 0 4 0 2 2 0 0 0 4 0"/></svg></span><h3>Retirada</h3><p>Endereço e horários da unidade em Passo Fundo: <strong>não confirmados.</strong></p><span class="receiving-card__status">Aguardando confirmação local</span></article>
+          <div>
+            <h3>Entrega e retirada</h3>
+            <p>Endereço, horários e áreas de entrega em Passo Fundo ainda não foram confirmados. Por isso, nenhum frete é calculado aqui.</p>
           </div>
-          <details class="reference-fees page-shell">
-            <summary>Consultar taxas que aparecem na loja de Guaíba <span>— apenas referência, não vale para Passo Fundo</span></summary>
-            <div class="reference-fees__body"><p>O cadastro C10 informa valores por área para Guaíba e Eldorado do Sul. Eles não foram usados no cálculo desta prévia e não indicam cobertura da unidade de Passo Fundo.</p><div id="fee-reference-list" class="fee-reference-list"></div></div>
-          </details>
-        </div>
-      </section>
-
-      <section class="data-status page-shell" id="sobre-os-dados">
-        <div class="data-status__mark" aria-hidden="true">i</div>
-        <div class="data-status__text"><span class="eyebrow"><span class="eyebrow__line"></span> INFORMAÇÃO CLARA</span><h2>Uma boa compra<br />começa com clareza.</h2><p>Esta é uma prévia de venda, com carrinho e revisão demonstrativos. Ela não envia pedidos, cobra pagamentos nem guarda dados pessoais. Nenhuma taxa de Guaíba é aplicada a Passo Fundo.</p></div>
-        <div class="data-status__facts">
-          <div><span class="fact-label">Catálogo, fotos e preços</span><a href="https://app.c10.site/301-materia-prima-guaiba" target="_blank" rel="noreferrer">Consultados em Guaíba ↗</a><small>212 itens · 28 categorias · estoque não informado</small></div>
-          <div><span class="fact-label">Unidade de Passo Fundo</span><strong>Unidade solicitada</strong><small>Endereço, estoque e condições locais não confirmados</small></div>
-          <div><span class="fact-label">Pagamento</span><strong>Etapa demonstrativa</strong><small>Opções de Guaíba exibidas como referência; integração real ausente</small></div>
+          <div>
+            <h3>Pedidos</h3>
+            <p>Esta prévia não envia pedidos nem recebe pagamentos. A sacola serve para simular a compra e fica salva só neste navegador.</p>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer class="site-footer"><div class="page-shell footer-inner"><a class="brand brand--footer" href="#inicio" aria-label="Matéria Prima, início"><span class="brand__mark" aria-hidden="true"><span></span><span></span><span></span></span><span class="brand__name">matéria<span>prima</span></span></a><span class="footer-note">Prévia demonstrativa · Matéria Prima Passo Fundo</span><a class="back-top" href="#inicio">Voltar ao início ↑</a></div></footer>
+    <footer class="site-footer">
+      <div class="site-footer__inner shell">
+        <span class="brand brand--small">
+          <span class="brand__mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span class="brand__name">matéria prima<small>Passo Fundo</small></span>
+        </span>
+        <p>Prévia demonstrativa. Catálogo de referência: <a href="https://app.c10.site/301-materia-prima-guaiba" target="_blank" rel="noreferrer">Matéria Prima Guaíba</a>.</p>
+        <a class="text-button" href="#inicio">Voltar ao topo</a>
+      </div>
+    </footer>
 
-    <div class="overlay" id="overlay" hidden></div>
-    <aside class="cart-drawer" id="cart-drawer" aria-labelledby="cart-title" aria-modal="true" role="dialog" aria-hidden="true">
-      <div class="drawer-header"><div><span class="eyebrow"><span class="eyebrow__line"></span> SUA LISTA</span><h2 id="cart-title">Sua sacola <span id="cart-title-count"></span></h2></div><button class="close-button" type="button" id="close-cart" aria-label="Fechar sacola">×</button></div>
-      <div class="cart-items" id="cart-items"></div>
-      <div class="cart-empty" id="cart-empty"><span class="cart-empty__icon" aria-hidden="true">⌑</span><h3>Sua lista começa aqui</h3><p>Adicione um produto para ver o subtotal e seguir para a revisão da compra.</p><a class="text-link" href="#destaques" id="browse-products">Explorar produtos →</a></div>
-      <div class="drawer-summary"><div><span>Subtotal dos produtos</span><strong id="cart-subtotal">R$ 0,00</strong></div><small>Frete de Passo Fundo não calculado. Os preços acima são da referência Guaíba.</small><button class="button button--dark button--full" id="cart-checkout" type="button" disabled>Revisar sacola <span aria-hidden="true">→</span></button><span class="demo-caption">Prévia demonstrativa · nenhum pedido será enviado</span></div>
-    </aside>
-
-    <dialog class="product-dialog" id="product-dialog" aria-labelledby="product-dialog-title">
-      <form method="dialog" class="dialog-close-row"><button class="close-button" aria-label="Fechar produto">×</button></form>
+    <dialog class="product-dialog" id="product-dialog" aria-labelledby="detail-title">
+      <button class="icon-button dialog-close" type="button" data-close-dialog aria-label="Fechar produto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg></button>
       <div class="product-dialog__layout">
-        <div class="product-gallery"><div class="product-gallery__image"><img id="detail-image" src="" alt="" /></div><button class="gallery-arrow gallery-arrow--prev" id="gallery-prev" type="button" aria-label="Foto anterior">‹</button><button class="gallery-arrow gallery-arrow--next" id="gallery-next" type="button" aria-label="Próxima foto">›</button><div class="gallery-dots" id="gallery-dots"></div><span class="product-gallery__source">Foto do catálogo da loja Guaíba</span></div>
-        <div class="product-dialog__content"><span class="eyebrow"><span class="eyebrow__line"></span> <span id="detail-category"></span></span><h2 id="product-dialog-title"></h2><p class="product-dialog__brand" id="detail-brand"></p><p class="product-dialog__description" id="detail-description"></p><div id="detail-option-groups"></div><div class="product-dialog__price"><span>Preço de referência · Guaíba</span><strong id="detail-price"></strong><small>Preço e disponibilidade de Passo Fundo não confirmados.</small></div><a class="product-source-link" id="product-source-link" target="_blank" rel="noreferrer">Ver na loja de origem ↗</a><button class="button button--dark button--full" id="detail-add" type="button">Adicionar à sacola</button></div>
+        <div class="gallery">
+          <div class="gallery__frame">
+            <img id="detail-image" src="" alt="" width="640" height="640" />
+            <span class="gallery__fallback" id="detail-image-fallback" hidden>Foto indisponível</span>
+          </div>
+          <div class="gallery__controls" id="gallery-controls" hidden>
+            <button class="icon-button" id="gallery-prev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 6-6 6 6 6" /></svg></button>
+            <span id="gallery-position">1 de 2</span>
+            <button class="icon-button" id="gallery-next" type="button" aria-label="Próxima foto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 6 6 6-6 6" /></svg></button>
+          </div>
+        </div>
+        <div class="product-dialog__content">
+          <p class="product-dialog__group" id="detail-group"></p>
+          <h2 id="detail-title"></h2>
+          <p class="product-dialog__description" id="detail-description"></p>
+          <div id="detail-includes"></div>
+          <div id="detail-options"></div>
+          <div class="product-dialog__buy">
+            <div>
+              <strong class="product-dialog__price" id="detail-price"></strong>
+              <small>Preço de referência (Guaíba)</small>
+            </div>
+            <button class="button button--primary" id="detail-add" type="button">Adicionar à sacola</button>
+            <p class="product-dialog__hint" id="detail-hint" hidden></p>
+          </div>
+        </div>
       </div>
     </dialog>
 
-    <dialog class="checkout-dialog" id="checkout-dialog" aria-labelledby="checkout-title">
-      <form method="dialog" class="dialog-close-row"><button class="close-button" aria-label="Fechar revisão">×</button></form>
-      <div class="checkout-content">
-        <span class="eyebrow"><span class="eyebrow__line"></span> PRÉVIA DEMONSTRATIVA</span><h2 id="checkout-title">Revise sua compra</h2><p class="checkout-lead">Confira os itens e escolha como receber. Nenhum pedido ou pagamento será enviado nesta versão.</p>
-        <div class="step-indicator"><span class="step-indicator__active" id="step-dot-1">1</span><i></i><span id="step-dot-2">2</span></div>
-        <div class="checkout-step" id="step-fulfillment"><h3>Como você quer receber?</h3><div class="choice-grid"><button class="choice-card" type="button" data-fulfillment="delivery"><span class="choice-card__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v11H3zM14 11h4l3 3v4h-7z"/><circle cx="7.5" cy="18.5" r="1.8"/><circle cx="17.5" cy="18.5" r="1.8"/></svg></span><strong>Entrega</strong><small>Taxa para Passo Fundo: não confirmada</small></button><button class="choice-card" type="button" data-fulfillment="pickup"><span class="choice-card__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10h16M5 10l1-5h12l1 5M6 10v9h12v-9M9 19v-5h6v5"/><path d="M3 10a2 2 0 0 0 4 0 2 2 0 0 0 4 0 2 2 0 0 0 4 0 2 2 0 0 0 4 0"/></svg></span><strong>Retirada</strong><small>Local e horário em Passo Fundo: não confirmados</small></button></div>
-          <div class="address-preview" id="address-preview" hidden><span class="status-tag"><span></span> Endereço de demonstração</span><p>Use dados fictícios. A prévia não consulta CEP, não valida cobertura e não envia nem salva estas informações.</p><div class="address-grid"><label>CEP<input id="delivery-cep" type="text" inputmode="numeric" maxlength="9" autocomplete="off" placeholder="00000-000" /></label><label>Rua / avenida<input id="delivery-street" type="text" autocomplete="off" placeholder="Nome da rua" /></label><label>Número<input id="delivery-number" type="text" autocomplete="off" placeholder="Nº" /></label><label>Bairro<input id="delivery-neighborhood" type="text" autocomplete="off" placeholder="Bairro" /></label><label class="address-grid__wide">Cidade / UF<input id="delivery-city" type="text" autocomplete="off" placeholder="Passo Fundo / RS" /></label></div></div>
-          <fieldset class="payment-select"><legend>Forma de pagamento <span>opções identificadas em Guaíba</span></legend><div id="payment-options" class="payment-options"></div></fieldset>
-          <div class="checkout-callout"><strong>Pagamento em modo de demonstração</strong><span>As opções abaixo vêm da loja de Guaíba. A unidade de Passo Fundo ainda precisa confirmar as formas aceitas e conectar as credenciais. Nenhum dado de cartão será solicitado ou guardado.</span></div>
-          <div class="checkout-actions"><button class="button button--dark" type="button" id="continue-review" disabled>Ver revisão <span aria-hidden="true">→</span></button><button class="text-link" type="button" data-close>Voltar à loja</button></div>
+    <dialog class="cart-drawer" id="cart-drawer" aria-labelledby="cart-title">
+      <div class="cart-drawer__head">
+        <h2 id="cart-title">Sua sacola <span id="cart-title-count"></span></h2>
+        <button class="icon-button" type="button" data-close-dialog aria-label="Fechar sacola"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg></button>
+      </div>
+      <div class="cart-drawer__body">
+        <ul class="cart-lines" id="cart-lines"></ul>
+        <div class="cart-empty" id="cart-empty">
+          <h3>Sua sacola está vazia</h3>
+          <p>Adicione produtos do catálogo para ver o subtotal aqui.</p>
+          <button class="button button--secondary" type="button" data-close-dialog>Ver produtos</button>
         </div>
-        <div class="checkout-step" id="step-review" hidden><h3>Resumo da sacola</h3><div class="review-lines" id="review-lines"></div><div class="review-card"><div><span>Recebimento</span><strong id="review-fulfillment">Não selecionado</strong></div><div><span>Endereço / local</span><strong id="review-location">Não confirmado</strong></div><div><span>Taxa de entrega</span><strong>Não calculada</strong></div><div><span>Pagamento</span><strong id="review-payment">Não selecionado</strong></div><div><span>Subtotal</span><strong id="review-subtotal">R$ 0,00</strong></div><div class="review-card__total"><span>Total com condições locais</span><strong id="review-total">Não calculado</strong></div></div><p class="checkout-note">O subtotal usa os preços observados em Guaíba. O frete não foi somado. Dados e regras de Passo Fundo e a integração de pagamento ainda não foram confirmados.</p><div class="checkout-actions"><button class="button button--dark" type="button" data-close>Fechar revisão <span aria-hidden="true">✓</span></button><button class="text-link" type="button" id="back-to-fulfillment">Voltar</button></div></div>
+      </div>
+      <div class="cart-drawer__foot" id="cart-foot" hidden>
+        <div class="cart-total"><span>Subtotal</span><strong id="cart-subtotal">R$ 0,00</strong></div>
+        <p class="cart-note">Valores de referência da loja de Guaíba. Frete e pagamento não são calculados. Pedidos online ainda não estão disponíveis nesta prévia.</p>
+        <button class="button button--primary button--full" type="button" data-close-dialog>Continuar comprando</button>
+        <button class="text-button cart-clear" type="button" id="cart-clear">Esvaziar sacola</button>
       </div>
     </dialog>
+
+    <p class="visually-hidden" id="announcer" aria-live="polite"></p>
+    <div class="toast" id="toast" aria-hidden="true" hidden></div>
   </body>
 </html>
