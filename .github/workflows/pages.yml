@@ -27,16 +27,15 @@ jobs:
         uses: actions/configure-pages@v5
         with:
           enablement: true
+      # upload-pages-artifact aceita uma única pasta, então os arquivos públicos são reunidos em _site.
+      - name: Collect the storefront files
+        run: |
+          mkdir -p _site
+          cp -r index.html styles.css app.js catalogo.json vitrine.json assets _site/
       - name: Upload the storefront
         uses: actions/upload-pages-artifact@v3
         with:
-          path: |
-            index.html
-            styles.css
-            app.js
-            catalogo.json
-            vitrine.json
-            assets
+          path: _site
       - name: Deploy to Pages
         id: deployment
         uses: actions/deploy-pages@v4

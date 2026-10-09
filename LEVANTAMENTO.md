@@ -88,7 +88,7 @@ Referência visual: gravação da loja C10 de Guaíba, com cartões horizontais 
 ### Pendências para a versão comercial
 
 - Confirmar em Passo Fundo: produtos, preços, estoque, endereço, horários, áreas e taxas de entrega e formas de pagamento.
-- Aprovar a imagem da página inicial, que é a mão aprovada com o pote trocado pela foto oficial do produto 1987.
+- Aprovar a imagem da página inicial: a mão aprovada com o pote trocado pela foto oficial do produto 1987, em escala proporcional.
 - Revisar erros de digitação do cadastro de origem, mantidos como estão: "Penuat"/"Peanut", "Protrein", "Atlhetica", "Gormert", "Concetrado".
-- Logotipo oficial da unidade Passo Fundo: o site usa um logotipo provisório em texto.
+- Logotipo em alta resolução: o arquivo fornecido tem 150 × 150 px e perde nitidez em telas de alta densidade. Falta um SVG ou PNG transparente em alta resolução.
 - Perfis oficiais em redes sociais (continuam sem confirmação).

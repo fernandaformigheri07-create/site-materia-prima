@@ -7,7 +7,8 @@
     <meta name="description" content="Prévia da loja Matéria Prima Passo Fundo: creatinas, whey protein, pré-treinos e suplementos. Produtos e preços de referência, sem venda online." />
     <title>Matéria Prima · Passo Fundo</title>
     <link rel="preload" href="assets/montserrat.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" as="image" href="assets/hero/mao-creatina.webp" imagesrcset="assets/hero/mao-creatina-640.webp 640w, assets/hero/mao-creatina.webp 1120w" imagesizes="(min-width: 700px) 560px, 62vw" />
+    <link rel="icon" href="assets/marca/logo-materia-prima-original.jpg" type="image/jpeg" />
+    <link rel="preload" as="image" href="assets/hero/mao-creatina.webp" imagesrcset="assets/hero/mao-creatina-640.webp 640w, assets/hero/mao-creatina.webp 1120w" imagesizes="(min-width: 700px) 420px, 75vw" />
     <link rel="stylesheet" href="styles.css" />
     <script>document.documentElement.classList.add("js");</script>
     <script src="app.js" defer></script>
@@ -19,9 +20,8 @@
 
     <header class="site-header">
       <div class="site-header__inner shell">
-        <a class="brand" href="#inicio" aria-label="Matéria Prima Passo Fundo, voltar ao início">
-          <span class="brand__mark" aria-hidden="true"><span></span><span></span><span></span></span>
-          <span class="brand__name">matéria prima<small>Passo Fundo</small></span>
+        <a class="brand" href="#inicio" translate="no">
+          <img src="assets/marca/logo-materia-prima-faixa.png" width="150" height="54" alt="Matéria Prima Suplementos, voltar ao início" />
         </a>
         <nav class="main-nav" id="main-nav" aria-label="Navegação principal">
           <a href="#produtos">Produtos</a>
@@ -46,12 +46,12 @@
     <main>
       <section class="hero" id="inicio" aria-labelledby="hero-title">
         <div class="hero__copy">
-          <p class="hero__store">Matéria Prima Suplementos, Passo Fundo</p>
+          <p class="hero__store">Loja de suplementos em Passo Fundo</p>
           <h1 id="hero-title">Sua evolução começa com o essencial.</h1>
-          <p class="hero__text">Creatinas, proteínas e suplementos para acompanhar sua rotina.</p>
+          <p class="hero__text">Creatinas, whey protein, pré-treinos e combos para acompanhar sua rotina. Escolha por categoria e veja preço e sabores de cada produto.</p>
           <div class="hero__actions">
             <a class="button button--primary" href="#produtos">Explorar produtos</a>
-            <button class="text-button" type="button" id="hero-product">Ver a creatina da foto</button>
+            <a class="text-button" href="#produtos" data-nav-group="combos">Ver combos</a>
           </div>
         </div>
         <div class="hero__media">
@@ -60,9 +60,9 @@
             id="hero-image"
             src="assets/hero/mao-creatina.webp"
             srcset="assets/hero/mao-creatina-640.webp 640w, assets/hero/mao-creatina.webp 1120w"
-            sizes="(min-width: 700px) 560px, 62vw"
+            sizes="(min-width: 700px) 420px, 75vw"
             width="1120"
-            height="1071"
+            height="1106"
             alt="Mão segurando um pote de Creatina Matéria Prima de 300 gramas"
             fetchpriority="high"
             decoding="async"
@@ -80,7 +80,7 @@
             <label class="search-field">
               <span class="visually-hidden">Buscar produto</span>
               <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" /><path d="m16 16 4.4 4.4" /></svg>
-              <input id="product-search" type="search" placeholder="Buscar por nome, marca ou sabor" autocomplete="off" enterkeyhint="search" />
+              <input id="product-search" name="busca" type="search" placeholder="Buscar por nome, marca ou sabor…" autocomplete="off" spellcheck="false" enterkeyhint="search" />
             </label>
             <label class="sort-field">
               <span>Ordenar</span>
@@ -115,6 +115,7 @@
         </div>
       </section>
 
+      <div class="info-band">
       <section class="info shell" id="informacoes" aria-labelledby="info-title">
         <h2 id="info-title">Antes de comprar</h2>
         <div class="info__grid">
@@ -132,13 +133,13 @@
           </div>
         </div>
       </section>
+      </div>
     </main>
 
     <footer class="site-footer">
       <div class="site-footer__inner shell">
-        <span class="brand brand--small">
-          <span class="brand__mark" aria-hidden="true"><span></span><span></span><span></span></span>
-          <span class="brand__name">matéria prima<small>Passo Fundo</small></span>
+        <span class="brand brand--small" translate="no">
+          <img src="assets/marca/logo-materia-prima-faixa.png" width="150" height="54" alt="Matéria Prima Suplementos" loading="lazy" />
         </span>
         <p>Prévia demonstrativa. Catálogo de referência: <a href="https://app.c10.site/301-materia-prima-guaiba" target="_blank" rel="noreferrer">Matéria Prima Guaíba</a>.</p>
         <a class="text-button" href="#inicio">Voltar ao topo</a>

@@ -14,7 +14,7 @@ Depois abra `http://127.0.0.1:4173`. Não há dependências para instalar.
 
 ## O que esta versão faz
 
-- Página inicial branca e minimalista com a imagem da mão segurando a creatina. A imagem entra uma vez, de baixo para cima, e aparece parada para quem pede menos movimento no sistema.
+- Cabeçalho com o logotipo oficial e página inicial em tom claro e quente, com a mão segurando a creatina num painel amarelo-claro. A mão sobe uma vez, como um gesto, e aparece parada para quem pede menos movimento no sistema.
 - Vitrine com **100 produtos** em 7 categorias, visível sem cliques extras. As categorias filtram a lista, e a barra de categorias fica fixa durante a rolagem.
 - Busca por nome, marca, descrição ou sabor, sem diferenciar acentos nem maiúsculas. Também há ordenação por preço ou nome, contagem de resultados e um botão para limpar os filtros.
 - Combos em seção própria, com a lista "o que vem no combo" tirada da descrição cadastrada.
@@ -33,6 +33,7 @@ A prévia **não** tem checkout, frete, pagamento, CPF, endereço nem envio de p
 | [`vitrine.json`](./vitrine.json) | Seleção da vitrine: grupos, ordem, IDs dos 100 produtos, critérios e nomes de exibição opcionais. |
 | `assets/catalog/` | Fotos originais em WebP. A subpasta `thumbs/` guarda as miniaturas de 240 px usadas nos cartões. |
 | `assets/hero/` | Imagem da página inicial: a mão aprovada, com o pote trocado pela foto oficial do produto. |
+| `assets/marca/` | Logotipo oficial fornecido (`logo-materia-prima-original.jpg`, 150 × 150 px, sem alteração) e a versão usada no site (`logo-materia-prima-faixa.png`), que só tira a margem amarela vazia de cima e de baixo, com autorização. |
 | [`scripts/gerar-miniaturas.py`](./scripts/gerar-miniaturas.py) | Gera as miniaturas a partir de `vitrine.json` (precisa de Pillow). |
 | [`LEVANTAMENTO.md`](./LEVANTAMENTO.md) | Método da coleta, regras de Guaíba e pendências de Passo Fundo. |
 
@@ -67,4 +68,26 @@ Nenhum dado de vendas ou popularidade foi usado.
 
 ## Imagem da página inicial
 
-A composição aprovada (mão, pose e enquadramento) foi mantida. O pote gerado por IA tinha textos errados no rótulo, como "Mhts la Prmg", "NICE / % REAL / CURE" e "PREMITY". Por isso, ele foi trocado pela foto oficial do produto 1987, *Creatina Matéria Prima Pote 300g*, com recorte, encaixe e preenchimento da palma. A largura do pote foi ajustada em cerca de 4% para assentar na mão. A arte final ainda precisa da aprovação do cliente.
+A composição aprovada (mão, pose e enquadramento) foi mantida. O pote gerado por IA tinha textos errados no rótulo, como "Mhts la Prmg", "NICE / % REAL / CURE" e "PREMITY". Por isso, ele foi trocado pela foto oficial do produto 1987, *Creatina Matéria Prima Pote 300g*.
+
+Na versão de 9/10/2026 o pote passou a ter **escala proporcional (1,35 nos dois eixos)**, sem o alargamento de 4% da versão anterior. Ele tem a mesma largura do pote da composição aprovada, cobre o pote antigo por inteiro e não precisa de palma reconstruída; só alguns pixels de contorno entre dedo e pote foram completados. A arte final ainda precisa da aprovação do cliente.
+
+Na página, a imagem fica num painel amarelo-claro. O braço sai pelo canto inferior direito do painel, e o conjunto mão + pote fica centralizado na vertical. A entrada dura 1,25 s, com subida de 84 px (56 px no celular) e a curva `cubic-bezier(0.38, 0.06, 0.2, 1)`: começa devagar e assenta sem quique. Ela acontece uma vez e é desligada quando o sistema pede menos movimento.
+
+## Identidade e cores
+
+- O logotipo é o arquivo oficial fornecido. Não há símbolo, monograma ou logotipo em texto criado para o site.
+- A cor de destaque é o amarelo do próprio logotipo, `#F8C305`, aprovado no lugar do `#FFE62D` do cadastro de Guaíba. Os neutros são quentes: `#FAFAF7`, `#FFF8DC`, `#F4F4F0`, `#EAEAE5`, `#202020` e `#666666`.
+- O amarelo aparece no botão principal, na categoria ativa, no contador da sacola, no sabor escolhido, nos marcadores dos combos e no traço dos títulos de seção.
+
+## Endereço com filtros
+
+A vitrine guarda categoria, busca e ordem no endereço, por exemplo `?categoria=whey&busca=chocolate&ordem=price-low`. Assim dá para compartilhar um link que já abre filtrado.
+
+## Publicação
+
+O fluxo `.github/workflows/pages.yml` só publica com push na `main`. A ação `upload-pages-artifact` aceita uma única pasta, então o fluxo agora junta os arquivos públicos em `_site` antes do upload. Nada foi publicado.
+
+## Skills usadas no desenvolvimento
+
+`frontend-design` e `superpowers` (já instaladas), `web-design-guidelines` (vercel-labs/agent-skills), `cro` e `copywriting` (coreyhaines31/marketingskills). As três últimas foram instaladas no projeto com `npx skills add … -a claude-code` e ficam em `.claude/skills/`, fora do Git.
