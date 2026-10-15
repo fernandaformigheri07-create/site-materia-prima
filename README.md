@@ -126,7 +126,11 @@ A vitrine guarda categoria, busca e ordem no endereço, por exemplo `?categoria=
 
 ## Publicação
 
-O fluxo `.github/workflows/pages.yml` só publica com push na `main`. A ação `upload-pages-artifact` aceita uma única pasta, então o fluxo agora junta os arquivos públicos em `_site` antes do upload. Nada foi publicado.
+A prévia está publicada em **https://fernandaformigheri07-create.github.io/site-materia-prima/**. A publicação foi feita em 15/10/2026, a pedido.
+
+O GitHub Pages está configurado para servir direto do branch `redesign-minimalista` (opção "deploy from a branch", pasta raiz). O arquivo `.nojekyll` faz os arquivos serem servidos como estão. **Cada push nesse branch atualiza o site público.**
+
+A `main` não foi alterada. O fluxo `.github/workflows/pages.yml` (push na `main`) não é usado enquanto o Pages estiver configurado assim.
 
 ## Skills usadas no desenvolvimento
 
